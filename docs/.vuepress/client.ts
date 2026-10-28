@@ -1,5 +1,6 @@
 import { defineClientConfig } from 'vuepress/client'
 import Bilibili from './components/Bilibili.vue'
+import BubbleShowcase from './components/BubbleShowcase.vue'
 import FloatingRail from './components/FloatingRail.vue'
 
 const ZOOM_STEP = 0.25
@@ -71,6 +72,7 @@ function mountMermaidZoom(root: ParentNode = document): void {
 export default defineClientConfig({
   enhance({ app, router }) {
     app.component('Bilibili', Bilibili)
+    app.component('BubbleShowcase', BubbleShowcase)
 
     if (typeof window !== 'undefined') {
       router.afterEach(() => {

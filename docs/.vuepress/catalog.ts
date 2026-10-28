@@ -44,6 +44,7 @@ export const navbar: NavbarOptions = [
       link: `/projects/${path}.html`,
     })),
   },
+  { text: '泡泡', link: '/bubble/' },
   {
     text: '关于',
     prefix: '/about',
@@ -76,6 +77,14 @@ export const sidebar: SidebarOptions = {
   '/about/': [
     {
       text: '关于',
+      collapsible: false,
+      expanded: true,
+      children: 'structure',
+    },
+  ],
+  '/bubble/': [
+    {
+      text: '泡泡',
       collapsible: false,
       expanded: true,
       children: 'structure',

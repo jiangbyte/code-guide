@@ -102,6 +102,13 @@ onUnmounted(() => {
         </div>
       </div>
 
+      <a class="jb-rail__item jb-rail__item--bubble" href="/bubble/">
+        <span class="jb-rail__icon jb-rail__icon--bubble" aria-hidden="true">
+          <img src="/img/logo.png" width="22" height="22" alt="" />
+        </span>
+        <span class="jb-rail__label">泡泡</span>
+      </a>
+
       <a class="jb-rail__item" href="/about/me.html">
         <span class="jb-rail__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8">

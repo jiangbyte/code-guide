@@ -90,7 +90,7 @@ export default defineUserConfig({
   head: [
     ['meta', { name: 'keywords', content: '摸鱼猫泡泡,Charlie,技术文档,Java,Git,VuePress' }],
     ['meta', { name: 'author', content: 'Charlie' }],
-    ['meta', { name: 'theme-color', content: '#3eaf7c' }],
+    ['meta', { name: 'theme-color', content: '#e8913a' }],
     ['link', { rel: 'icon', href: '/img/logo.png', type: 'image/png' }],
     ['link', { rel: 'apple-touch-icon', href: '/img/logo.png' }],
   ],

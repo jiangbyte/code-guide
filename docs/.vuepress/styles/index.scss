@@ -4,6 +4,146 @@
   font-weight: 700;
 }
 
+/* 首页标题：纯色主题色，去掉主题自带渐变 */
+.vp-hero-title {
+  background: none;
+  background-clip: unset;
+  color: var(--vp-c-accent);
+  -webkit-text-fill-color: var(--vp-c-accent);
+
+  [data-theme='dark'] & {
+    background: none;
+    color: var(--vp-c-accent);
+    -webkit-text-fill-color: var(--vp-c-accent);
+  }
+}
+
+/* 透明底 logo：略放大，避免细描边发糊 */
+.vp-nav-logo {
+  width: 2.1rem;
+  height: 2.1rem;
+  object-fit: contain;
+}
+
+.vp-hero-image {
+  object-fit: contain;
+}
+
+.jb-bubble {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.jb-bubble__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  max-width: 100%;
+  padding: 1rem 1.25rem 0.85rem;
+  border: 1px solid var(--vp-c-border);
+  border-radius: 1rem;
+  background: var(--vp-c-bg-alt);
+  color: inherit;
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: var(--vp-c-accent);
+      box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
+      transform: translateY(-2px);
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.jb-bubble__hero {
+  display: block;
+  width: min(320px, 72vw);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.jb-bubble__hint {
+  font-size: 0.85rem;
+  color: var(--vp-c-text-mute);
+}
+
+.jb-bubble__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  width: min(640px, 100%);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @media (max-width: hope-config.$mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.jb-bubble__card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--vp-c-border);
+  border-radius: 0.75rem;
+  background: var(--vp-c-bg);
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+
+  &.is-active {
+    border-color: var(--vp-c-accent);
+    background: var(--vp-c-bg-alt);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: var(--vp-c-accent);
+    }
+  }
+}
+
+.jb-bubble__thumb {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.jb-bubble__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+
+  strong {
+    font-size: 0.95rem;
+  }
+
+  span {
+    font-size: 0.8rem;
+    line-height: 1.35;
+    color: var(--vp-c-text-mute);
+  }
+}
+
 /* 小屏品牌区：logo + 站名并排，避免挤掉右侧按钮 */
 @media (max-width: hope-config.$pad) {
   .vp-brand {
@@ -392,6 +532,28 @@
   svg {
     width: 18px;
     height: 18px;
+  }
+
+  img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+  }
+}
+
+.jb-rail__item--bubble {
+  color: var(--vp-c-accent);
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: var(--vp-c-accent-hover);
+      background: var(--vp-c-accent-soft);
+    }
+  }
+
+  &:active {
+    color: var(--vp-c-accent-hover);
+    background: var(--vp-c-accent-soft);
   }
 }
 

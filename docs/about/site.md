@@ -20,6 +20,7 @@ icon: info
 
 - **笔记**（`/posts/`）：按系列看，目前有 Java、Tools、Practice、Embedded、Soft Exam、Ops 等
 - **项目**（`/projects/`）：每个开源或个人作品一篇，导航和侧栏都能进
+- **泡泡**（`/bubble/`）：拟人形象与造型
 - **关于**（`/about/`）：关于自己、关于本站
 
 站内可以全文搜索；笔记和项目页有目录、标签和阅读信息，方便定位。
