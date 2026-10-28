@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="1024" height="1024">
+  <title>CJ</title>
+  <path
+    fill="none"
+    stroke="#3eaf7c"
+    stroke-width="36"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="
+      M 168 68
+      C 150 42 118 34 90 42
+      C 52 54 36 88 40 122
+      C 44 158 72 184 112 186
+      C 132 187 148 176 152 158
+      L 152 204
+      Q 152 228 124 230
+      Q 104 231 98 212
+    "
+  />
+</svg>
