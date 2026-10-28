@@ -4,6 +4,29 @@
   font-weight: 700;
 }
 
+/* 小屏品牌区：logo + 站名并排，避免挤掉右侧按钮 */
+@media (max-width: hope-config.$pad) {
+  .vp-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-width: 0;
+    max-width: min(52vw, 11rem);
+  }
+
+  .vp-nav-logo {
+    flex-shrink: 0;
+  }
+
+  .vp-site-name {
+    overflow: hidden;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
 .vp-navbar-start {
   > .vp-nav-links {
     margin-inline-start: 1.75rem !important;
@@ -242,13 +265,34 @@
   }
 }
 
+/* 小屏页脚：每项独占一行，去掉 | */
+@media (max-width: hope-config.$tablet) {
+  .vp-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    line-height: 1.55;
+
+    .jb-footer-chunk {
+      display: block;
+      white-space: normal;
+      text-align: center;
+    }
+
+    .jb-footer-sep {
+      display: none;
+    }
+  }
+}
+
 .vp-back-to-top-button {
   display: none !important;
 }
 
 .jb-rail {
-  --jb-rail-size: 44px;
-  --jb-rail-radius: 6px;
+  --jb-rail-size: 48px;
+  --jb-rail-radius: 8px;
   --jb-rail-shadow: 0 1px 6px rgb(0 0 0 / 8%);
   --jb-rail-surface: #fff;
 
@@ -260,9 +304,11 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 8px;
+  gap: 10px;
   width: var(--jb-rail-size);
   transform: translateY(-50%);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 
   html.dark & {
     --jb-rail-surface: #1b1b1f;
@@ -274,6 +320,7 @@
   border-radius: var(--jb-rail-radius);
   background: var(--jb-rail-surface);
   box-shadow: var(--jb-rail-shadow);
+  /* 勿 overflow:hidden，会裁掉绝对定位的二维码面板 */
 }
 
 .jb-rail__item-wrap {
@@ -285,24 +332,33 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1px;
+  gap: 2px;
   box-sizing: border-box;
   width: var(--jb-rail-size);
-  height: var(--jb-rail-size);
-  padding: 0;
+  min-height: var(--jb-rail-size);
+  height: auto;
+  padding: 6px 0;
   border: 0;
   border-radius: 0;
   background: transparent;
   color: var(--vp-c-text);
   cursor: pointer;
   text-decoration: none;
+  user-select: none;
   transition: color 0.15s, background-color 0.15s;
 
   &:last-child {
     border-radius: 0 0 var(--jb-rail-radius) var(--jb-rail-radius);
   }
 
-  &:hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: var(--vp-c-accent);
+      background: var(--vp-c-bg-alt);
+    }
+  }
+
+  &:active {
     color: var(--vp-c-accent);
     background: var(--vp-c-bg-alt);
   }
@@ -315,35 +371,44 @@
 .jb-rail__item--wechat {
   color: #07c160;
 
-  &:hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: #06ad56;
+      background: rgb(7 193 96 / 8%);
+    }
+  }
+
+  &:active {
     color: #06ad56;
-    background: rgb(7 193 96 / 8%);
+    background: rgb(7 193 96 / 12%);
   }
 }
 
 .jb-rail__icon {
   display: inline-flex;
   line-height: 0;
+  pointer-events: none;
 
   svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
   }
 }
 
 .jb-rail__label {
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.2;
   white-space: nowrap;
+  pointer-events: none;
 }
 
 .jb-rail__panel {
   position: absolute;
   z-index: 1;
-  right: calc(100% + 8px);
+  right: calc(100% + 10px);
   top: 0;
-  width: 156px;
-  padding: 10px;
+  width: 168px;
+  padding: 12px;
   border: 0;
   border-radius: var(--jb-rail-radius);
   background: var(--jb-rail-surface);
@@ -353,8 +418,8 @@
 
 .jb-rail__qr {
   display: block;
-  width: 132px;
-  height: 132px;
+  width: 144px;
+  height: 144px;
   margin: 0 auto;
   border-radius: 4px;
   background: #fff;
@@ -362,7 +427,7 @@
 }
 
 .jb-rail__panel-text {
-  margin: 6px 0 0;
+  margin: 8px 0 0;
   font-size: 12px;
   font-weight: 600;
 }
@@ -374,6 +439,7 @@
   box-sizing: border-box;
   width: var(--jb-rail-size);
   height: var(--jb-rail-size);
+  min-height: 44px;
   padding: 0;
   border: 0;
   border-radius: var(--jb-rail-radius);
@@ -381,14 +447,23 @@
   color: var(--vp-c-text-mute);
   box-shadow: var(--jb-rail-shadow);
   cursor: pointer;
+  user-select: none;
   transition: color 0.15s, background-color 0.15s;
 
   svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
   }
 
-  &:hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: var(--vp-c-accent);
+      background: var(--vp-c-bg-alt);
+    }
+  }
+
+  &:active {
     color: var(--vp-c-accent);
     background: var(--vp-c-bg-alt);
   }
@@ -396,8 +471,38 @@
 
 @media (max-width: hope-config.$tablet) {
   .jb-rail {
-    --jb-rail-size: 40px;
-    right: 6px;
+    --jb-rail-size: 52px;
+    right: max(8px, env(safe-area-inset-right));
+    gap: 12px;
+  }
+
+  .jb-rail__item {
+    min-height: 52px;
+    padding: 8px 0;
+  }
+
+  .jb-rail__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .jb-rail__label {
+    font-size: 12px;
+  }
+
+  .jb-rail__panel {
+    /* 小屏：面板开在按钮左侧，避免被裁切或出屏 */
+    right: calc(100% + 10px);
+    left: auto;
+    top: 50%;
+    bottom: auto;
+    width: min(180px, calc(100vw - 80px));
+    transform: translateY(-50%);
+  }
+
+  .jb-rail__qr {
+    width: 148px;
+    height: 148px;
   }
 }
 

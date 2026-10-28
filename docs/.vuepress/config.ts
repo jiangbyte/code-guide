@@ -127,6 +127,9 @@ export default defineUserConfig({
     logo: '/img/logo.png',
     logoDark: '/img/logo.png',
     favicon: '/img/logo.png',
+    // 小屏导航同时显示站点名（默认有 logo 时会隐藏）
+    hideSiteNameOnMobile: false,
+    navbarTitle: '摸鱼猫泡泡',
     hotReload: true,
 
     toc: {

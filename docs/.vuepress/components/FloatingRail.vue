@@ -24,20 +24,36 @@ function toggleWechat() {
   open.value = !open.value
 }
 
-function onDocClick(e: MouseEvent) {
+function canHoverOpen() {
+  return window.matchMedia('(hover: hover) and (pointer: fine)').matches
+}
+
+function onDocPointer(e: Event) {
   const target = e.target as HTMLElement | null
-  if (!target?.closest('.jb-rail__item-wrap')) open.value = false
+  // 点在整个侧栏（含二维码面板）内不关闭
+  if (target?.closest('.jb-rail')) return
+  open.value = false
+}
+
+/** 仅精细指针设备用悬停展开，触屏只靠点击 */
+function onWechatEnter() {
+  if (canHoverOpen()) openWechat()
+}
+
+function onWechatLeave() {
+  if (canHoverOpen()) closeWechat()
 }
 
 onMounted(() => {
   onScroll()
   window.addEventListener('scroll', onScroll, { passive: true })
-  document.addEventListener('click', onDocClick)
+  // 冒泡阶段：按钮上的 pointerdown 先于 document，避免误关
+  document.addEventListener('pointerdown', onDocPointer)
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
-  document.removeEventListener('click', onDocClick)
+  document.removeEventListener('pointerdown', onDocPointer)
 })
 </script>
 
@@ -46,15 +62,16 @@ onUnmounted(() => {
     <div class="jb-rail__stack">
       <div
         class="jb-rail__item-wrap"
-        @mouseenter="openWechat"
-        @mouseleave="closeWechat"
+        @mouseenter="onWechatEnter"
+        @mouseleave="onWechatLeave"
       >
         <button
           type="button"
           class="jb-rail__item jb-rail__item--wechat"
           :aria-expanded="open"
           aria-controls="jb-wechat-panel"
-          @click.stop="toggleWechat"
+          @pointerdown.stop
+          @click.stop.prevent="toggleWechat"
         >
           <span class="jb-rail__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
