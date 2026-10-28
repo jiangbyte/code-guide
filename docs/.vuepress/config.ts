@@ -91,7 +91,8 @@ export default defineUserConfig({
     ['meta', { name: 'keywords', content: '摸鱼猫泡泡,Charlie,技术文档,Java,Git,VuePress' }],
     ['meta', { name: 'author', content: 'Charlie' }],
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
-    ['link', { rel: 'icon', href: '/img/logo.png' }],
+    ['link', { rel: 'icon', href: '/img/logo.png', type: 'image/png' }],
+    ['link', { rel: 'apple-touch-icon', href: '/img/logo.png' }],
   ],
 
   bundler: viteBundler({
@@ -123,6 +124,9 @@ export default defineUserConfig({
     author: 'Charlie',
     repo: 'jiangbyte/code-guide',
     docsDir: 'docs',
+    logo: '/img/logo.png',
+    logoDark: '/img/logo.png',
+    favicon: '/img/logo.png',
     hotReload: true,
 
     toc: {
