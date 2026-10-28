@@ -1,7 +1,71 @@
+import { existsSync, readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { viteBundler } from '@vuepress/bundler-vite'
 import { defineUserConfig } from 'vuepress'
 import { hopeTheme } from 'vuepress-theme-hope'
 import { navbar, sidebar } from './catalog'
+
+const rootDir = resolve(fileURLToPath(new URL('.', import.meta.url)), '../..')
+
+/**
+ * 把仓库根目录的 .env / .env.local 载入 process.env（不覆盖已有环境变量）。
+ */
+function loadEnvFiles() {
+  // 1. 先快照已有环境变量（CI / shell），这些键全程不覆盖
+  // 2. 再读 .env，最后读 .env.local（本地覆盖示例配置）
+  // 3. 只解析 KEY=VALUE，忽略空行与 # 注释
+  const preset = new Set(Object.keys(process.env))
+  for (const name of ['.env', '.env.local']) {
+    const file = resolve(rootDir, name)
+    if (!existsSync(file)) continue
+    for (const line of readFileSync(file, 'utf8').split(/\r?\n/)) {
+      const trimmed = line.trim()
+      if (!trimmed || trimmed.startsWith('#')) continue
+      const eq = trimmed.indexOf('=')
+      if (eq <= 0) continue
+      const key = trimmed.slice(0, eq).trim()
+      let value = trimmed.slice(eq + 1).trim()
+      if (
+        (value.startsWith('"') && value.endsWith('"')) ||
+        (value.startsWith("'") && value.endsWith("'"))
+      ) {
+        value = value.slice(1, -1)
+      }
+      if (!preset.has(key)) process.env[key] = value
+    }
+  }
+}
+
+loadEnvFiles()
+
+/** DocSearch 三项齐全时启用云端搜索，否则回退本地 slimsearch。 */
+function resolveSearchPlugins() {
+  // 1. 从环境变量读取；缺任一则不启用 DocSearch，避免半成品配置打进站点
+  // 2. 未配置时保留 slimsearch，本地预览仍有搜索框
+  const appId = process.env.DOCSEARCH_APP_ID?.trim()
+  const apiKey = process.env.DOCSEARCH_API_KEY?.trim()
+  const indexName = process.env.DOCSEARCH_INDEX_NAME?.trim()
+  if (appId && apiKey && indexName) {
+    return {
+      docsearch: {
+        appId,
+        apiKey,
+        indexName,
+      },
+    }
+  }
+  return {
+    slimsearch: {
+      indexContent: true,
+      locales: {
+        '/': {
+          placeholder: '搜索',
+        },
+      },
+    },
+  }
+}
 
 function fixSlimsearchWorker() {
   return {
@@ -166,14 +230,7 @@ export default defineUserConfig({
         offline: true,
       },
 
-      slimsearch: {
-        indexContent: true,
-        locales: {
-          '/': {
-            placeholder: '搜索',
-          },
-        },
-      },
+      ...resolveSearchPlugins(),
 
       components: {
         components: [

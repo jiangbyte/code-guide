@@ -25,6 +25,8 @@ pnpm docs:dev      # 本地预览
 pnpm docs:build    # 构建静态站点
 ```
 
+DocSearch（可选）：复制 `.env.example` 为 `.env` / `.env.local`，填入 `DOCSEARCH_APP_ID`、`DOCSEARCH_API_KEY`、`DOCSEARCH_INDEX_NAME`。三项齐全时用 Algolia DocSearch，否则回退本地 slimsearch。CI 也可直接注入同名环境变量。
+
 ## 许可证
 
 双许可：

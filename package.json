@@ -10,6 +10,7 @@
   "devDependencies": {
     "@vue/repl": "^4.7.2",
     "@vuepress/bundler-vite": "next",
+    "@vuepress/plugin-docsearch": "2.0.0-rc.137",
     "@vuepress/plugin-feed": "2.0.0-rc.137",
     "@vuepress/plugin-revealjs": "2.0.0-rc.137",
     "@vuepress/plugin-slimsearch": "2.0.0-rc.137",

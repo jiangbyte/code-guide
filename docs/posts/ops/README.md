@@ -8,4 +8,4 @@ dir:
   expanded: true
 ---
 
-运维与本机开发环境相关笔记，含 Debian、Docker、MySQL、Redis。
+运维与本机开发环境相关笔记，含 Debian、Docker、Nginx 网关、MySQL、Redis。
