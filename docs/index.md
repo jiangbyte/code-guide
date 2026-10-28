@@ -17,7 +17,7 @@ features:
 ### 我是 Charlie
 
 - 做 AI 全栈研发，也写笔记。更多见 [关于自己](/about/me.html)。
-
+- English: [About Me](/en/about/me.html)
 
 - 掘金：[juejin.cn](https://juejin.cn/user/1968540037686224)
 - GitHub：[jiangbyte](https://github.com/jiangbyte)

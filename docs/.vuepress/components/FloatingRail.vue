@@ -1,5 +1,34 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { useRouteLocale } from 'vuepress/client'
+
+const routeLocale = useRouteLocale()
+const isEn = computed(() => routeLocale.value === '/en/')
+
+const aboutHref = computed(() => `${routeLocale.value}about/me.html`)
+const labels = computed(() =>
+  isEn.value
+    ? {
+        wechat: 'WeChat',
+        wechatPanel: 'Scan to follow on WeChat',
+        wechatDialog: 'WeChat QR code',
+        bubble: 'Bubble',
+        about: 'About',
+        projects: 'Projects',
+        top: 'Back to top',
+        rail: 'Shortcuts',
+      }
+    : {
+        wechat: '公众号',
+        wechatPanel: '扫码关注公众号',
+        wechatDialog: '微信公众号二维码',
+        bubble: '泡泡',
+        about: '关于',
+        projects: '项目',
+        top: '回到顶部',
+        rail: '快捷入口',
+      },
+)
 
 const open = ref(false)
 const showTop = ref(false)
@@ -58,7 +87,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <aside class="jb-rail" aria-label="快捷入口">
+  <aside class="jb-rail" :aria-label="labels.rail">
     <div class="jb-rail__stack">
       <div
         class="jb-rail__item-wrap"
@@ -80,7 +109,7 @@ onUnmounted(() => {
               />
             </svg>
           </span>
-          <span class="jb-rail__label">公众号</span>
+          <span class="jb-rail__label">{{ labels.wechat }}</span>
         </button>
 
         <div
@@ -88,7 +117,7 @@ onUnmounted(() => {
           id="jb-wechat-panel"
           class="jb-rail__panel"
           role="dialog"
-          aria-label="微信公众号二维码"
+          :aria-label="labels.wechatDialog"
           @click.stop
         >
           <img
@@ -96,9 +125,9 @@ onUnmounted(() => {
             src="/img/wechat-qr.jpg"
             width="148"
             height="148"
-            alt="微信公众号二维码"
+            :alt="labels.wechatDialog"
           />
-          <p class="jb-rail__panel-text">扫码关注公众号</p>
+          <p class="jb-rail__panel-text">{{ labels.wechatPanel }}</p>
         </div>
       </div>
 
@@ -106,17 +135,17 @@ onUnmounted(() => {
         <span class="jb-rail__icon jb-rail__icon--bubble" aria-hidden="true">
           <img src="/img/logo.png" width="22" height="22" alt="" />
         </span>
-        <span class="jb-rail__label">泡泡</span>
+        <span class="jb-rail__label">{{ labels.bubble }}</span>
       </a>
 
-      <a class="jb-rail__item" href="/about/me.html">
+      <a class="jb-rail__item" :href="aboutHref">
         <span class="jb-rail__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8">
             <circle cx="12" cy="8" r="3.2" />
             <path d="M5.5 19c1.2-3.2 3.5-4.8 6.5-4.8s5.3 1.6 6.5 4.8" stroke-linecap="round" />
           </svg>
         </span>
-        <span class="jb-rail__label">关于</span>
+        <span class="jb-rail__label">{{ labels.about }}</span>
       </a>
 
       <a class="jb-rail__item" href="/projects/">
@@ -126,7 +155,7 @@ onUnmounted(() => {
             <path d="M8 9.5h8M8 13h5" stroke-linecap="round" />
           </svg>
         </span>
-        <span class="jb-rail__label">项目</span>
+        <span class="jb-rail__label">{{ labels.projects }}</span>
       </a>
     </div>
 
@@ -134,7 +163,7 @@ onUnmounted(() => {
       v-show="showTop"
       type="button"
       class="jb-rail__top"
-      aria-label="回到顶部"
+      :aria-label="labels.top"
       @click="scrollTop"
     >
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2">

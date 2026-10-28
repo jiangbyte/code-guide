@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { viteBundler } from '@vuepress/bundler-vite'
 import { defineUserConfig } from 'vuepress'
 import { hopeTheme } from 'vuepress-theme-hope'
-import { navbar, sidebar } from './catalog'
+import { navbarEn, navbarZh, sidebarEn, sidebarZh } from './catalog'
 
 const rootDir = resolve(fileURLToPath(new URL('.', import.meta.url)), '../..')
 
@@ -62,6 +62,9 @@ function resolveSearchPlugins() {
         '/': {
           placeholder: '搜索',
         },
+        '/en/': {
+          placeholder: 'Search',
+        },
       },
     },
   }
@@ -83,9 +86,18 @@ function fixSlimsearchWorker() {
 }
 
 export default defineUserConfig({
-  lang: 'zh-CN',
-  title: '摸鱼猫泡泡',
-  description: '摸鱼猫泡泡：记录 Java、工具与工程实践。',
+  locales: {
+    '/': {
+      lang: 'zh-CN',
+      title: '摸鱼猫泡泡',
+      description: '摸鱼猫泡泡：记录 Java、工具与工程实践。',
+    },
+    '/en/': {
+      lang: 'en-US',
+      title: 'Moyu Cat Bubble',
+      description: 'Moyu Cat Bubble: notes on Java, tools, and engineering practice.',
+    },
+  },
 
   head: [
     ['meta', { name: 'keywords', content: '摸鱼猫泡泡,Charlie,技术文档,Java,Git,VuePress' }],
@@ -129,7 +141,6 @@ export default defineUserConfig({
     favicon: '/img/logo.png',
     // 小屏导航同时显示站点名（默认有 logo 时会隐藏）
     hideSiteNameOnMobile: false,
-    navbarTitle: '摸鱼猫泡泡',
     hotReload: true,
 
     toc: {
@@ -149,11 +160,23 @@ export default defineUserConfig({
       end: ['Language', 'Repo', 'Outlook', 'Search'],
     },
 
-    navbar,
-    sidebar,
-
-    metaLocales: {
-      toc: '本页目录',
+    locales: {
+      '/': {
+        navbarTitle: '摸鱼猫泡泡',
+        navbar: navbarZh,
+        sidebar: sidebarZh,
+        metaLocales: {
+          toc: '本页目录',
+        },
+      },
+      '/en/': {
+        navbarTitle: 'Moyu Cat Bubble',
+        navbar: navbarEn,
+        sidebar: sidebarEn,
+        metaLocales: {
+          toc: 'On This Page',
+        },
+      },
     },
 
     displayFooter: true,
