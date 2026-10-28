@@ -23,24 +23,3 @@ pnpm install
 pnpm docs:dev      # 本地预览
 pnpm docs:build    # 构建静态站点
 ```
-
-## 目录结构
-
-```text
-code-guide/
-├── docs/                 # 文档源码
-│   ├── .vuepress/        # VuePress / Theme Hope 配置与组件
-│   ├── posts/            # 笔记（java / git / demo …）
-│   ├── about/            # 关于
-│   └── index.md          # 首页
-├── package.json
-└── pnpm-lock.yaml
-```
-
-## 常用命令
-
-| 命令 | 说明 |
-|------|------|
-| `pnpm docs:dev` | 开发服务器 |
-| `pnpm docs:build` | 生产构建（输出到 `docs/.vuepress/dist`） |
-| `pnpm docs:clean-dev` | 清缓存后启动开发服务器 |
