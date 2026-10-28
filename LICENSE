@@ -1,0 +1,17 @@
+Dual License
+============
+
+This repository uses two licenses:
+
+1. Site source code (VuePress / Theme Hope configuration, components,
+   styles, and project tooling such as package.json):
+   MIT License — see LICENSE-MIT
+
+2. Documentation content (Markdown under docs/, including posts and
+   about pages, and associated media assets under docs/):
+   Creative Commons Attribution-NonCommercial 4.0 International
+   (CC BY-NC 4.0) — see LICENSE-CC-BY-NC-4.0
+
+You may quote or adapt the documentation for non-commercial purposes
+with attribution (link to https://jiangbyte.cn or this repository).
+Commercial reuse of the documentation content is not permitted.
