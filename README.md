@@ -2,9 +2,9 @@
 
 # code-guide
 
-**摸鱼猫泡泡 · 技术文档站**
+**摸鱼猫泡泡**
 
-VuePress + Theme Hope · 记录 Java、Git 与工程实践
+VuePress + Theme Hope · 记录 Java、工具与工程实践
 
 [![VuePress](https://img.shields.io/badge/VuePress-next-3eaf7c?logo=vue.js&logoColor=white)](https://vuepress.vuejs.org/)
 [![Theme Hope](https://img.shields.io/badge/Theme-Hope-46bd87)](https://theme-hope.vuejs.press/)
@@ -13,7 +13,7 @@ VuePress + Theme Hope · 记录 Java、Git 与工程实践
 
 </div>
 
-Charlie 的个人技术文档站源码，在线阅读：[jiangbyte.cn](https://jiangbyte.cn)
+摸鱼猫泡泡源码，在线阅读：[jiangbyte.cn](https://jiangbyte.cn)
 
 ---
 

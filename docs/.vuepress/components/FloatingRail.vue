@@ -12,13 +12,21 @@ function scrollTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
+function openWechat() {
+  open.value = true
+}
+
+function closeWechat() {
+  open.value = false
+}
+
 function toggleWechat() {
   open.value = !open.value
 }
 
 function onDocClick(e: MouseEvent) {
   const target = e.target as HTMLElement | null
-  if (!target?.closest('.jb-rail')) open.value = false
+  if (!target?.closest('.jb-rail__item-wrap')) open.value = false
 }
 
 onMounted(() => {
@@ -36,7 +44,11 @@ onUnmounted(() => {
 <template>
   <aside class="jb-rail" aria-label="快捷入口">
     <div class="jb-rail__stack">
-      <div class="jb-rail__item-wrap">
+      <div
+        class="jb-rail__item-wrap"
+        @mouseenter="openWechat"
+        @mouseleave="closeWechat"
+      >
         <button
           type="button"
           class="jb-rail__item jb-rail__item--wechat"
@@ -83,7 +95,7 @@ onUnmounted(() => {
         <span class="jb-rail__label">关于</span>
       </a>
 
-      <a class="jb-rail__item" href="/projects.html">
+      <a class="jb-rail__item" href="/projects/">
         <span class="jb-rail__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8">
             <rect x="3.5" y="4.5" width="17" height="15" rx="2" />

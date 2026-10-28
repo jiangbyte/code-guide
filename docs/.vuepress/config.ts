@@ -21,7 +21,7 @@ function fixSlimsearchWorker() {
 export default defineUserConfig({
   lang: 'zh-CN',
   title: '摸鱼猫泡泡',
-  description: '摸鱼猫泡泡：Charlie 的技术文档站，记录 Java、Git 与工程实践。',
+  description: '摸鱼猫泡泡：记录 Java、工具与工程实践。',
 
   head: [
     ['meta', { name: 'keywords', content: '摸鱼猫泡泡,Charlie,技术文档,Java,Git,VuePress' }],
@@ -209,7 +209,10 @@ export default defineUserConfig({
         author: 'Charlie',
         isArticle: (page) => {
           const p = page.filePathRelative
-          return Boolean(p?.startsWith('posts/') && p !== 'posts/README.md')
+          if (!p) return false
+          if (p.startsWith('posts/') && p !== 'posts/README.md') return true
+          if (p.startsWith('projects/') && p !== 'projects/README.md') return true
+          return false
         },
         customHead: (head, page) => {
           const fm = page.frontmatter as {

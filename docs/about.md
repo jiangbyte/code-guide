@@ -3,7 +3,4 @@ title: 关于
 description: 关于 Charlie 与摸鱼猫泡泡。
 ---
 
-# 关于
-
-- [关于自己](/about/me.html)
-- [关于本站](/about/site.html)
+关于 Charlie 与摸鱼猫泡泡本站。可在侧栏进入「关于自己」与「关于本站」。
