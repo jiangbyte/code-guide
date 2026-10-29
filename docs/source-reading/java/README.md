@@ -1,6 +1,6 @@
 ---
 title: Java
-description: Java 系列笔记。
+description: Java / JDK 源码阅读笔记。
 index: false
 dir:
   text: Java

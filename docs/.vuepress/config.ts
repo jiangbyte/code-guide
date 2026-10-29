@@ -297,9 +297,14 @@ export default defineUserConfig({
         author: 'Charlie',
         isArticle: (page) => {
           const p = page.filePathRelative
-          if (!p) return false
-          if (p.startsWith('posts/') && p !== 'posts/README.md') return true
-          if (p.startsWith('projects/') && p !== 'projects/README.md') return true
+          if (!p || p.endsWith('/README.md') || p === 'README.md') return false
+          if (p.startsWith('posts/')) return true
+          if (p.startsWith('projects/')) return true
+          if (p.startsWith('source-reading/')) return true
+          if (p.startsWith('kaoyan-408/')) return true
+          if (p.startsWith('soft-exam/')) return true
+          if (p.startsWith('database/')) return true
+          if (p.startsWith('career/')) return true
           return false
         },
         customHead: (head, page) => {

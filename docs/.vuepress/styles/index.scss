@@ -429,8 +429,13 @@
   border: 0;
 }
 
-.vp-footer-wrapper {
-  overflow: visible;
+/*
+ * 本页目录与页脚：不改 z-index（抬高 .vp-page 会盖住左侧栏导致无法点击）。
+ * 1. 取消页脚负 margin，避免分割线上拉；分割线保持通栏完整
+ * 2. 目录高度由 client.ts 只夹紧 .vp-toc-wrapper（主题原有单滚动），整块停在脚部上方
+ */
+.vp-page:not(.not-found) + .vp-footer-wrapper {
+  margin-top: 0;
 }
 
 .vp-footer {

@@ -1,12 +1,40 @@
 import type { NavbarOptions, SidebarOptions } from 'vuepress-theme-hope'
 
 export const postSeries = [
-  { text: 'Java', path: 'java' },
   { text: 'Tools', path: 'tools' },
   { text: 'Practice', path: 'practice' },
   { text: 'Embedded', path: 'embedded' },
-  { text: 'Soft Exam', path: 'soft-exam' },
   { text: 'Ops', path: 'ops' },
+] as const
+
+/** 源码阅读 · 子系列 */
+export const sourceReadingSeries = [
+  { text: 'Java', path: 'java' },
+] as const
+
+/** 考研408 · 科目 */
+export const kaoyan408Series = [
+  { text: '计算机原理', path: 'computer-organization' },
+  { text: '计算机网络', path: 'computer-network' },
+  { text: '数据结构', path: 'data-structure' },
+  { text: '操作系统', path: 'operating-system' },
+] as const
+
+/** 软考 · 科目 */
+export const softExamSeries = [
+  { text: '高级架构设计师', path: 'advanced-architect' },
+] as const
+
+/** 数据库 · 引擎 */
+export const databaseSeries = [
+  { text: 'MySQL', path: 'mysql' },
+  { text: 'Redis', path: 'redis' },
+] as const
+
+/** 职场与面试 · 子栏目 */
+export const careerSeries = [
+  { text: '职场工作记录', path: 'workplace' },
+  { text: '面试经验', path: 'interview' },
 ] as const
 
 const projectLinks = [
@@ -21,6 +49,17 @@ const projectLinks = [
   { text: 'ACOJ', path: 'acoj' },
 ] as const
 
+function structureSidebar(text: string) {
+  return [
+    {
+      text,
+      collapsible: false,
+      expanded: true,
+      children: 'structure' as const,
+    },
+  ]
+}
+
 /** 顶部导航 */
 export const navbar: NavbarOptions = [
   { text: '首页', link: '/', exact: true },
@@ -30,6 +69,46 @@ export const navbar: NavbarOptions = [
     children: postSeries.map(({ text, path }) => ({
       text,
       link: `/posts/${path}/`,
+    })),
+  },
+  {
+    text: '源码阅读',
+    prefix: '/source-reading/',
+    children: sourceReadingSeries.map(({ text, path }) => ({
+      text,
+      link: `/source-reading/${path}/`,
+    })),
+  },
+  {
+    text: '数据库',
+    prefix: '/database/',
+    children: databaseSeries.map(({ text, path }) => ({
+      text,
+      link: `/database/${path}/`,
+    })),
+  },
+  {
+    text: '考研408',
+    prefix: '/kaoyan-408/',
+    children: kaoyan408Series.map(({ text, path }) => ({
+      text,
+      link: `/kaoyan-408/${path}/`,
+    })),
+  },
+  {
+    text: '软考',
+    prefix: '/soft-exam/',
+    children: softExamSeries.map(({ text, path }) => ({
+      text,
+      link: `/soft-exam/${path}/`,
+    })),
+  },
+  {
+    text: '职场与面试',
+    prefix: '/career/',
+    children: careerSeries.map(({ text, path }) => ({
+      text,
+      link: `/career/${path}/`,
     })),
   },
   {
@@ -54,40 +133,32 @@ export const navbar: NavbarOptions = [
 /** 侧栏 */
 export const sidebar: SidebarOptions = {
   ...Object.fromEntries(
-    postSeries.map(({ text, path }) => [
-      `/posts/${path}/`,
-      [
-        {
-          text,
-          collapsible: false,
-          expanded: true,
-          children: 'structure' as const,
-        },
-      ],
+    postSeries.map(({ text, path }) => [`/posts/${path}/`, structureSidebar(text)]),
+  ),
+  ...Object.fromEntries(
+    sourceReadingSeries.map(({ text, path }) => [
+      `/source-reading/${path}/`,
+      structureSidebar(text),
     ]),
   ),
-  '/projects/': [
-    {
-      text: '项目',
-      collapsible: false,
-      expanded: true,
-      children: 'structure',
-    },
-  ],
-  '/about/': [
-    {
-      text: '关于',
-      collapsible: false,
-      expanded: true,
-      children: 'structure',
-    },
-  ],
-  '/bubble/': [
-    {
-      text: '泡泡',
-      collapsible: false,
-      expanded: true,
-      children: 'structure',
-    },
-  ],
+  '/source-reading/': structureSidebar('源码阅读'),
+  ...Object.fromEntries(
+    databaseSeries.map(({ text, path }) => [`/database/${path}/`, structureSidebar(text)]),
+  ),
+  '/database/': structureSidebar('数据库'),
+  ...Object.fromEntries(
+    kaoyan408Series.map(({ text, path }) => [`/kaoyan-408/${path}/`, structureSidebar(text)]),
+  ),
+  '/kaoyan-408/': structureSidebar('考研408'),
+  ...Object.fromEntries(
+    softExamSeries.map(({ text, path }) => [`/soft-exam/${path}/`, structureSidebar(text)]),
+  ),
+  '/soft-exam/': structureSidebar('软考'),
+  ...Object.fromEntries(
+    careerSeries.map(({ text, path }) => [`/career/${path}/`, structureSidebar(text)]),
+  ),
+  '/career/': structureSidebar('职场与面试'),
+  '/projects/': structureSidebar('项目'),
+  '/about/': structureSidebar('关于'),
+  '/bubble/': structureSidebar('泡泡'),
 }
