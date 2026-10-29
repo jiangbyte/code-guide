@@ -1,8 +1,6 @@
 import { defineClientConfig } from 'vuepress/client'
-import BeautyPack from './components/BeautyPack.vue'
 import Bilibili from './components/Bilibili.vue'
 import FloatingRail from './components/FloatingRail.vue'
-import StickerPack from './components/StickerPack.vue'
 
 const ZOOM_STEP = 0.25
 const ZOOM_MIN = 0.5
@@ -131,9 +129,7 @@ function mountMermaidZoom(root: ParentNode = document): void {
 
 export default defineClientConfig({
   enhance({ app, router }) {
-    app.component('BeautyPack', BeautyPack)
     app.component('Bilibili', Bilibili)
-    app.component('StickerPack', StickerPack)
 
     if (typeof window !== 'undefined') {
       router.afterEach(() => {
