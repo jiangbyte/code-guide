@@ -29,118 +29,187 @@
   object-fit: contain;
 }
 
-.jb-bubble {
+/* 人设默认立绘：控制展示尺寸，避免通栏过大 */
+.jb-mascot {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
+  justify-content: center;
+  margin: 1rem 0 1.25rem;
+
+  img {
+    display: block;
+    width: min(320px, 72vw);
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
+}
+
+/* 表情包：铺满正文宽的自适应网格，格内显示名称与状态 */
+.jb-stickers {
+  width: 100%;
   margin: 1rem 0 1.5rem;
 }
 
-.jb-bubble__stage {
+.jb-stickers__panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+  gap: 10px;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--vp-c-border);
+  border-radius: 12px;
+  background: var(--vp-c-bg-alt);
+
+  @media (max-width: hope-config.$mobile) {
+    grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+    gap: 8px;
+    padding: 10px;
+  }
+}
+
+.jb-stickers__cell {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.65rem;
-  max-width: 100%;
-  padding: 1rem 1.25rem 0.85rem;
-  border: 1px solid var(--vp-c-border);
-  border-radius: 1rem;
-  background: var(--vp-c-bg-alt);
+  gap: 0.35rem;
+  min-width: 0;
+  padding: 0.65rem 0.45rem 0.7rem;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: var(--vp-c-bg);
   color: inherit;
   cursor: pointer;
-  user-select: none;
-  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  text-align: center;
+  transition: background-color 0.12s, border-color 0.12s, box-shadow 0.12s;
+
+  &.is-active,
+  &:active {
+    border-color: var(--vp-c-accent);
+    background: var(--vp-c-accent-soft);
+  }
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       border-color: var(--vp-c-accent);
-      box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
-      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgb(0 0 0 / 6%);
     }
-  }
-
-  &:active {
-    transform: translateY(0);
   }
 }
 
-.jb-bubble__hero {
-  display: block;
-  width: min(320px, 72vw);
+.jb-stickers__thumb {
+  width: min(88px, 100%);
   height: auto;
   aspect-ratio: 1;
   object-fit: contain;
   pointer-events: none;
+  user-select: none;
 }
 
-.jb-bubble__hint {
-  font-size: 0.85rem;
+.jb-stickers__name {
+  display: block;
+  width: 100%;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.jb-stickers__status {
+  display: -webkit-box;
+  width: 100%;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: 0.72rem;
+  line-height: 1.35;
   color: var(--vp-c-text-mute);
 }
 
-.jb-bubble__list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
-  width: min(640px, 100%);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-
-  @media (max-width: hope-config.$mobile) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.jb-bubble__card {
+/* 点击格子直接弹出全屏预览，方便表情多时取图 */
+.jb-stickers__lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  width: 100%;
-  padding: 0.65rem 0.75rem;
-  border: 1px solid var(--vp-c-border);
-  border-radius: 0.75rem;
-  background: var(--vp-c-bg);
-  color: inherit;
-  text-align: start;
-  cursor: pointer;
-  transition: border-color 0.15s, background-color 0.15s;
-
-  &.is-active {
-    border-color: var(--vp-c-accent);
-    background: var(--vp-c-bg-alt);
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      border-color: var(--vp-c-accent);
-    }
-  }
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgb(0 0 0 / 55%);
+  -webkit-tap-highlight-color: transparent;
 }
 
-.jb-bubble__thumb {
-  flex-shrink: 0;
-  width: 72px;
-  height: 72px;
-  object-fit: contain;
-  pointer-events: none;
-}
-
-.jb-bubble__meta {
+.jb-stickers__lightbox-card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  min-width: 0;
+  align-items: center;
+  gap: 0.75rem;
+  width: min(400px, 100%);
+  padding: 1.25rem 1.1rem 1rem;
+  border-radius: 14px;
+  background: var(--vp-c-bg);
+  box-shadow: 0 16px 48px rgb(0 0 0 / 28%);
+}
+
+.jb-stickers__lightbox-img {
+  display: block;
+  width: min(280px, 72vw);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  user-select: none;
+}
+
+.jb-stickers__lightbox-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+  text-align: center;
 
   strong {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
   }
 
   span {
-    font-size: 0.8rem;
-    line-height: 1.35;
+    font-size: 0.85rem;
+    line-height: 1.4;
     color: var(--vp-c-text-mute);
+  }
+}
+
+.jb-stickers__lightbox-tip {
+  margin-top: 0.15rem;
+  font-size: 0.75rem !important;
+  opacity: 0.85;
+}
+
+.jb-stickers__lightbox-close {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.55rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--vp-c-text-mute);
+  cursor: pointer;
+  font-size: 1.4rem;
+  line-height: 1;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: var(--vp-c-accent);
+      background: var(--vp-c-bg-alt);
+    }
   }
 }
 

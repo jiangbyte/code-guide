@@ -21,8 +21,8 @@ const projectLinks = [
   { text: 'ACOJ', path: 'acoj' },
 ] as const
 
-/** 中文导航 */
-export const navbarZh: NavbarOptions = [
+/** 顶部导航 */
+export const navbar: NavbarOptions = [
   { text: '首页', link: '/', exact: true },
   {
     text: '笔记',
@@ -51,21 +51,8 @@ export const navbarZh: NavbarOptions = [
   },
 ]
 
-/** 英文导航：先开放首页与关于，其余内容仍以中文为主 */
-export const navbarEn: NavbarOptions = [
-  { text: 'Home', link: '/en/', exact: true },
-  {
-    text: 'About',
-    prefix: '/en/about',
-    children: [
-      { text: 'About Me', link: '/en/about/me.html' },
-      { text: 'About Site', link: '/en/about/site.html' },
-    ],
-  },
-]
-
-/** 中文侧栏 */
-export const sidebarZh: SidebarOptions = {
+/** 侧栏 */
+export const sidebar: SidebarOptions = {
   ...Object.fromEntries(
     postSeries.map(({ text, path }) => [
       `/posts/${path}/`,
@@ -98,18 +85,6 @@ export const sidebarZh: SidebarOptions = {
   '/bubble/': [
     {
       text: '泡泡',
-      collapsible: false,
-      expanded: true,
-      children: 'structure',
-    },
-  ],
-}
-
-/** 英文侧栏 */
-export const sidebarEn: SidebarOptions = {
-  '/en/about/': [
-    {
-      text: 'About',
       collapsible: false,
       expanded: true,
       children: 'structure',

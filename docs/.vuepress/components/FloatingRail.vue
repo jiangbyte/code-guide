@@ -1,44 +1,26 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { RouteLink, useRouteLocale } from 'vuepress/client'
+import { RouteLink } from 'vuepress/client'
 import { useRelatedLinks } from 'vuepress-theme-hope/client'
 
-const routeLocale = useRouteLocale()
-const isEn = computed(() => routeLocale.value === '/en/')
 // 与文末 PageNav 同源（主题 App setup 已 provide 侧栏）
 const { prevLink, nextLink } = useRelatedLinks()
 const hasPageNav = computed(() => Boolean(prevLink.value || nextLink.value))
 
-const aboutHref = computed(() => `${routeLocale.value}about/me.html`)
-const labels = computed(() =>
-  isEn.value
-    ? {
-        wechat: 'WeChat',
-        wechatPanel: 'Scan to follow on WeChat',
-        wechatDialog: 'WeChat QR code',
-        bubble: 'Bubble',
-        about: 'About',
-        projects: 'Projects',
-        prev: 'Prev',
-        next: 'Next',
-        pageNav: 'Previous and next',
-        top: 'Back to top',
-        rail: 'Shortcuts',
-      }
-    : {
-        wechat: '公众号',
-        wechatPanel: '扫码关注公众号',
-        wechatDialog: '微信公众号二维码',
-        bubble: '泡泡',
-        about: '关于',
-        projects: '项目',
-        prev: '上篇',
-        next: '下篇',
-        pageNav: '上下篇切换',
-        top: '回到顶部',
-        rail: '快捷入口',
-      },
-)
+const aboutHref = '/about/me.html'
+const labels = {
+  wechat: '公众号',
+  wechatPanel: '扫码关注公众号',
+  wechatDialog: '微信公众号二维码',
+  bubble: '泡泡',
+  about: '关于',
+  projects: '项目',
+  prev: '上篇',
+  next: '下篇',
+  pageNav: '上下篇切换',
+  top: '回到顶部',
+  rail: '快捷入口',
+}
 
 const open = ref(false)
 const showTop = ref(false)

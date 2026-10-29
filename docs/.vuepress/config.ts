@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { viteBundler } from '@vuepress/bundler-vite'
 import { defineUserConfig } from 'vuepress'
 import { hopeTheme } from 'vuepress-theme-hope'
-import { navbarEn, navbarZh, sidebarEn, sidebarZh } from './catalog'
+import { navbar, sidebar } from './catalog'
 
 const rootDir = resolve(fileURLToPath(new URL('.', import.meta.url)), '../..')
 
@@ -62,9 +62,6 @@ function resolveSearchPlugins() {
         '/': {
           placeholder: '搜索',
         },
-        '/en/': {
-          placeholder: 'Search',
-        },
       },
     },
   }
@@ -86,18 +83,9 @@ function fixSlimsearchWorker() {
 }
 
 export default defineUserConfig({
-  locales: {
-    '/': {
-      lang: 'zh-CN',
-      title: '摸鱼猫泡泡',
-      description: '摸鱼猫泡泡：记录 Java、工具与工程实践。',
-    },
-    '/en/': {
-      lang: 'en-US',
-      title: 'Moyu Cat Bubble',
-      description: 'Moyu Cat Bubble: notes on Java, tools, and engineering practice.',
-    },
-  },
+  lang: 'zh-CN',
+  title: '摸鱼猫泡泡',
+  description: '摸鱼猫泡泡：记录 Java、工具与工程实践。',
 
   head: [
     ['meta', { name: 'keywords', content: '摸鱼猫泡泡,Charlie,技术文档,Java,Git,VuePress' }],
@@ -149,8 +137,8 @@ export default defineUserConfig({
     logo: '/img/logo.png',
     logoDark: '/img/logo.png',
     favicon: '/img/logo.png',
-    // 小屏导航同时显示站点名（默认有 logo 时会隐藏）
-    hideSiteNameOnMobile: false,
+    // 小屏导航只留 logo，不显示站点名
+    hideSiteNameOnMobile: true,
     hotReload: true,
 
     toc: {
@@ -167,26 +155,14 @@ export default defineUserConfig({
     navbarLayout: {
       start: ['Brand', 'Links'],
       center: [],
-      end: ['Language', 'Repo', 'Outlook', 'Search'],
+      end: ['Repo', 'Outlook', 'Search'],
     },
 
-    locales: {
-      '/': {
-        navbarTitle: '摸鱼猫泡泡',
-        navbar: navbarZh,
-        sidebar: sidebarZh,
-        metaLocales: {
-          toc: '本页目录',
-        },
-      },
-      '/en/': {
-        navbarTitle: 'Moyu Cat Bubble',
-        navbar: navbarEn,
-        sidebar: sidebarEn,
-        metaLocales: {
-          toc: 'On This Page',
-        },
-      },
+    navbarTitle: '摸鱼猫泡泡',
+    navbar,
+    sidebar,
+    metaLocales: {
+      toc: '本页目录',
     },
 
     displayFooter: true,
