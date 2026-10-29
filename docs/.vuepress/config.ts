@@ -113,6 +113,10 @@ export default defineUserConfig({
       worker: {
         format: 'es',
       },
+      // elk / echarts 等图表分包本身 >1MB，属预期体积；提高阈值避免误报
+      build: {
+        chunkSizeWarningLimit: 1600,
+      },
       optimizeDeps: {
         include: [
           'mermaid',
@@ -128,6 +132,12 @@ export default defineUserConfig({
           'markmap-toolbar',
         ],
       },
+    },
+    // 确保覆盖 VuePress 内部 build 合并后的最终阈值
+    configureVite: (config) => {
+      config.build ??= {}
+      config.build.chunkSizeWarningLimit = 1600
+      return config
     },
   }),
 
@@ -195,6 +205,18 @@ export default defineUserConfig({
     copyright: false,
 
     markdown: {
+      // GitHub 风格代码高亮；conf 映射到 ini
+      highlighter: {
+        type: 'shiki',
+        themes: {
+          light: 'github-light',
+          dark: 'github-dark',
+        },
+        langAlias: {
+          conf: 'ini',
+        },
+      },
+
       gfm: true,
       breaks: true,
       linkify: true,
@@ -257,6 +279,9 @@ export default defineUserConfig({
       git: true,
 
       icon: {
+        // 离线打包 Iconify；frontmatter 使用带集合前缀的图标名
+        assets: 'iconify',
+        prefix: 'mdi:',
         offline: true,
       },
 

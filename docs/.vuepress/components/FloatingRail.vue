@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { useRouteLocale } from 'vuepress/client'
+import { RouteLink, useRouteLocale } from 'vuepress/client'
+import { useRelatedLinks } from 'vuepress-theme-hope/client'
 
 const routeLocale = useRouteLocale()
 const isEn = computed(() => routeLocale.value === '/en/')
+// 与文末 PageNav 同源（主题 App setup 已 provide 侧栏）
+const { prevLink, nextLink } = useRelatedLinks()
+const hasPageNav = computed(() => Boolean(prevLink.value || nextLink.value))
 
 const aboutHref = computed(() => `${routeLocale.value}about/me.html`)
 const labels = computed(() =>
@@ -15,6 +19,9 @@ const labels = computed(() =>
         bubble: 'Bubble',
         about: 'About',
         projects: 'Projects',
+        prev: 'Prev',
+        next: 'Next',
+        pageNav: 'Previous and next',
         top: 'Back to top',
         rail: 'Shortcuts',
       }
@@ -25,6 +32,9 @@ const labels = computed(() =>
         bubble: '泡泡',
         about: '关于',
         projects: '项目',
+        prev: '上篇',
+        next: '下篇',
+        pageNav: '上下篇切换',
         top: '回到顶部',
         rail: '快捷入口',
       },
@@ -158,6 +168,36 @@ onUnmounted(() => {
         <span class="jb-rail__label">{{ labels.projects }}</span>
       </a>
     </div>
+
+    <nav v-if="hasPageNav" class="jb-rail__nav" :aria-label="labels.pageNav">
+      <RouteLink
+        v-if="prevLink"
+        class="jb-rail__item jb-rail__item--nav"
+        :to="prevLink.link"
+        :title="prevLink.text"
+      >
+        <span class="jb-rail__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15.5 6 9.5 12l6 6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <span class="jb-rail__label">{{ labels.prev }}</span>
+      </RouteLink>
+
+      <RouteLink
+        v-if="nextLink"
+        class="jb-rail__item jb-rail__item--nav"
+        :to="nextLink.link"
+        :title="nextLink.text"
+      >
+        <span class="jb-rail__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M8.5 6 14.5 12l-6 6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <span class="jb-rail__label">{{ labels.next }}</span>
+      </RouteLink>
+    </nav>
 
     <button
       v-show="showTop"

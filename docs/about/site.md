@@ -1,7 +1,7 @@
 ---
 title: 关于本站
 description: 关于摸鱼猫泡泡：定位、内容结构、技术选型与许可。
-icon: info
+icon: information
 ---
 
 # 关于本站

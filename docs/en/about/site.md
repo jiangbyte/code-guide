@@ -1,7 +1,7 @@
 ---
 title: About Site
 description: About Moyu Cat Bubble — purpose, structure, stack, and license.
-icon: info
+icon: information
 ---
 
 # About Site

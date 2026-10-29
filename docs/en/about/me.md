@@ -1,7 +1,7 @@
 ---
 title: About Me
 description: About Charlie — AI full-stack engineer who also writes notes.
-icon: user
+icon: account
 ---
 
 # About Me

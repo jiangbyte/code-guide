@@ -433,8 +433,9 @@
 .jb-rail {
   --jb-rail-size: 48px;
   --jb-rail-radius: 8px;
-  --jb-rail-shadow: 0 1px 6px rgb(0 0 0 / 8%);
-  --jb-rail-surface: #fff;
+  /* 跟随主题明暗，避免 html.dark 与 [data-theme] 不一致 */
+  --jb-rail-shadow: 0 1px 6px var(--vp-c-shadow);
+  --jb-rail-surface: var(--vp-c-bg);
 
   position: fixed;
   z-index: 160;
@@ -449,10 +450,6 @@
   transform: translateY(-50%);
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
-
-  html.dark & {
-    --jb-rail-surface: #1b1b1f;
-  }
 }
 
 .jb-rail__stack {
@@ -594,6 +591,30 @@
   font-weight: 600;
 }
 
+/* 上下篇：独立成组，与文末 PageNav 同源 */
+.jb-rail__nav {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--jb-rail-radius);
+  background: var(--jb-rail-surface);
+  box-shadow: var(--jb-rail-shadow);
+  overflow: hidden;
+}
+
+.jb-rail__item--nav {
+  &:first-child {
+    border-radius: var(--jb-rail-radius) var(--jb-rail-radius) 0 0;
+  }
+
+  &:last-child {
+    border-radius: 0 0 var(--jb-rail-radius) var(--jb-rail-radius);
+  }
+
+  &:only-child {
+    border-radius: var(--jb-rail-radius);
+  }
+}
+
 .jb-rail__top {
   display: inline-flex;
   align-items: center;
@@ -707,4 +728,11 @@
   transition: transform 0.15s ease;
   display: inline-block;
   min-width: 100%;
+}
+
+/* 打印时隐藏悬浮快捷栏，避免进纸面 */
+@media print {
+  .jb-rail {
+    display: none !important;
+  }
 }

@@ -1,7 +1,7 @@
 ---
 title: 关于自己
 description: 关于 Charlie：从事 AI 全栈研发，也写笔记。
-icon: user
+icon: account
 ---
 
 # 关于自己
