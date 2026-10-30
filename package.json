@@ -5,7 +5,8 @@
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "docs:clean-dev": "vuepress dev docs --clean-cache"
+    "docs:clean-dev": "vuepress dev docs --clean-cache",
+    "docs:deploy": "bash scripts/deploy.sh"
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
