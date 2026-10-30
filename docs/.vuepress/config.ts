@@ -302,7 +302,7 @@ export default defineUserConfig({
           if (p.startsWith('posts/')) return true
           if (p.startsWith('projects/')) return true
           if (p.startsWith('source-reading/')) return true
-          if (p.startsWith('kaoyan-408/')) return true
+          if (p.startsWith('kaoyan/')) return true
           if (p.startsWith('soft-exam/')) return true
           if (p.startsWith('database/')) return true
           if (p.startsWith('career/')) return true

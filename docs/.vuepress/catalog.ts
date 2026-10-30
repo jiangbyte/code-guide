@@ -12,13 +12,23 @@ export const sourceReadingSeries = [
   { text: 'Java', path: 'java' },
 ] as const
 
-/** 考研408 · 科目 */
-export const kaoyan408Series = [
+/** 考研 · 专业课 / 公共课 */
+export const kaoyanSubjectSeries = [
   { text: '计算机原理', path: 'computer-organization' },
   { text: '计算机网络', path: 'computer-network' },
   { text: '数据结构', path: 'data-structure' },
   { text: '操作系统', path: 'operating-system' },
+  { text: '高数', path: 'advanced-math' },
+  { text: '英语', path: 'english' },
 ] as const
+
+/** 考研 · 日常记录 */
+export const kaoyanJournalSeries = [
+  { text: '考研记录', path: 'journal' },
+] as const
+
+/** 考研全部子目录（侧栏注册用） */
+export const kaoyanSeries = [...kaoyanSubjectSeries, ...kaoyanJournalSeries] as const
 
 /** 软考 · 科目 */
 export const softExamSeries = [
@@ -89,12 +99,24 @@ export const navbar: NavbarOptions = [
     })),
   },
   {
-    text: '考研408',
-    prefix: '/kaoyan-408/',
-    children: kaoyan408Series.map(({ text, path }) => ({
-      text,
-      link: `/kaoyan-408/${path}/`,
-    })),
+    text: '考研',
+    prefix: '/kaoyan/',
+    children: [
+      {
+        text: '科目',
+        children: kaoyanSubjectSeries.map(({ text, path }) => ({
+          text,
+          link: `/kaoyan/${path}/`,
+        })),
+      },
+      {
+        text: '记录',
+        children: kaoyanJournalSeries.map(({ text, path }) => ({
+          text,
+          link: `/kaoyan/${path}/`,
+        })),
+      },
+    ],
   },
   {
     text: '软考',
@@ -148,9 +170,9 @@ export const sidebar: SidebarOptions = {
   ),
   '/database/': structureSidebar('数据库'),
   ...Object.fromEntries(
-    kaoyan408Series.map(({ text, path }) => [`/kaoyan-408/${path}/`, structureSidebar(text)]),
+    kaoyanSeries.map(({ text, path }) => [`/kaoyan/${path}/`, structureSidebar(text)]),
   ),
-  '/kaoyan-408/': structureSidebar('考研408'),
+  '/kaoyan/': structureSidebar('考研'),
   ...Object.fromEntries(
     softExamSeries.map(({ text, path }) => [`/soft-exam/${path}/`, structureSidebar(text)]),
   ),

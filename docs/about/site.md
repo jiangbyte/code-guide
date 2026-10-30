@@ -21,7 +21,7 @@ icon: information
 - **笔记**（`/posts/`）：按系列看，目前有 Tools、Practice、Embedded、Ops 等
 - **源码阅读**（`/source-reading/`）：按语言整理，目前有 Java（JDK 源码解析）
 - **数据库**（`/database/`）：目前有 MySQL、Redis
-- **考研408**（`/kaoyan-408/`）：计原、计网、数据结构、操作系统
+- **考研**（`/kaoyan/`）：计原、计网、数据结构、操作系统，高数、英语，以及考研记录
 - **软考**（`/soft-exam/`）：目前有高级架构设计师（系统架构设计师）
 - **职场与面试**（`/career/`）：职场工作记录、面试经验
 - **项目**（`/projects/`）：每个开源或个人作品一篇，导航和侧栏都能进
