@@ -91,6 +91,7 @@ export default defineUserConfig({
     ['meta', { name: 'keywords', content: '摸鱼猫泡泡,Charlie,技术文档,Java,Git,VuePress' }],
     ['meta', { name: 'author', content: 'Charlie' }],
     ['meta', { name: 'theme-color', content: '#e8913a' }],
+    ['meta', { name: 'algolia-site-verification', content: '61FEEB8C8F1345C1' }],
     ['link', { rel: 'icon', href: '/img/logo.png', type: 'image/png' }],
     ['link', { rel: 'apple-touch-icon', href: '/img/logo.png' }],
   ],

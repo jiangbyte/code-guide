@@ -38,6 +38,7 @@ export const careerSeries = [
 ] as const
 
 const projectLinks = [
+  { text: 'imgkit', path: 'imgkit' },
   { text: 'go-blog', path: 'go-blog' },
   { text: 'code-guide', path: 'code-guide' },
   { text: 'M3U8 Downloader', path: 'm3u8-downloader' },
