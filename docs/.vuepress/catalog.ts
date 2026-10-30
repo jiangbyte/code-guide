@@ -142,6 +142,14 @@ export const navbar: NavbarOptions = [
       link: `/projects/${path}.html`,
     })),
   },
+  {
+    text: '时间线',
+    prefix: '/timeline/',
+    children: [
+      { text: '文章时间线', link: '/timeline/articles.html' },
+      { text: '站点时间线', link: '/timeline/site.html' },
+    ],
+  },
   { text: '泡泡', link: '/bubble/' },
   {
     text: '关于',
@@ -184,4 +192,5 @@ export const sidebar: SidebarOptions = {
   '/projects/': structureSidebar('项目'),
   '/about/': structureSidebar('关于'),
   '/bubble/': structureSidebar('泡泡'),
+  '/timeline/': structureSidebar('时间线'),
 }

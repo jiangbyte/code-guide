@@ -5,6 +5,8 @@ import { viteBundler } from '@vuepress/bundler-vite'
 import { defineUserConfig } from 'vuepress'
 import { hopeTheme } from 'vuepress-theme-hope'
 import { navbar, sidebar } from './catalog'
+import { isSiteArticle } from './articleFilter'
+import { articleTimelinePlugin } from './plugins/articleTimeline'
 
 const rootDir = resolve(fileURLToPath(new URL('.', import.meta.url)), '../..')
 
@@ -86,6 +88,8 @@ export default defineUserConfig({
   lang: 'zh-CN',
   title: '摸鱼猫泡泡',
   description: '摸鱼猫泡泡：记录 Java、工具与工程实践。',
+
+  plugins: [articleTimelinePlugin()],
 
   head: [
     ['meta', { name: 'keywords', content: '摸鱼猫泡泡,Charlie,技术文档,Java,Git,VuePress' }],
@@ -296,18 +300,7 @@ export default defineUserConfig({
         autoDescription: true,
         canonical: 'https://jiangbyte.cn',
         author: 'Charlie',
-        isArticle: (page) => {
-          const p = page.filePathRelative
-          if (!p || p.endsWith('/README.md') || p === 'README.md') return false
-          if (p.startsWith('posts/')) return true
-          if (p.startsWith('projects/')) return true
-          if (p.startsWith('source-reading/')) return true
-          if (p.startsWith('kaoyan/')) return true
-          if (p.startsWith('soft-exam/')) return true
-          if (p.startsWith('database/')) return true
-          if (p.startsWith('career/')) return true
-          return false
-        },
+        isArticle: (page) => isSiteArticle(page.filePathRelative),
         customHead: (head, page) => {
           const fm = page.frontmatter as {
             tag?: string | string[]
