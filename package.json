@@ -12,10 +12,9 @@
     "@iconify-json/mdi": "^1.2.3",
     "@vue/repl": "^4.7.2",
     "@vuepress/bundler-vite": "next",
-    "@vuepress/plugin-docsearch": "2.0.0-rc.137",
     "@vuepress/plugin-feed": "2.0.0-rc.137",
     "@vuepress/plugin-revealjs": "2.0.0-rc.137",
-    "@vuepress/plugin-slimsearch": "2.0.0-rc.137",
+    "@vuepress/plugin-search": "2.0.0-rc.137",
     "artplayer": "^5.4.0",
     "dayjs": "^1.11.23",
     "iconify-icon": "^3.0.4",
@@ -34,6 +33,7 @@
     "flowchart.ts": "^3.0.1",
     "markmap-lib": "^0.18.12",
     "markmap-toolbar": "^0.18.12",
-    "markmap-view": "^0.18.12"
+    "markmap-view": "^0.18.12",
+    "qrcode.vue": "^3.11.0"
   }
 }

@@ -47,17 +47,10 @@ export const careerSeries = [
   { text: '面试经验', path: 'interview' },
 ] as const
 
-const projectLinks = [
-  { text: 'imgkit', path: 'imgkit' },
-  { text: 'go-blog', path: 'go-blog' },
-  { text: 'code-guide', path: 'code-guide' },
-  { text: 'M3U8 Downloader', path: 'm3u8-downloader' },
-  { text: 'SparkSandbox', path: 'spark-sandbox' },
-  { text: 'Startpage', path: 'startpage' },
-  { text: '玄鉴', path: 'xuanjian' },
-  { text: 'ResumeFloat', path: 'resume-float' },
-  { text: 'Voxel', path: 'voxel' },
-  { text: 'ACOJ', path: 'acoj' },
+/** 项目 · 子栏目（导航进目录，侧栏出文章，同笔记） */
+export const projectSeries = [
+  { text: '开源项目', path: 'open-source' },
+  { text: '个人项目', path: 'personal' },
 ] as const
 
 function structureSidebar(text: string) {
@@ -137,9 +130,9 @@ export const navbar: NavbarOptions = [
   {
     text: '项目',
     prefix: '/projects/',
-    children: projectLinks.map(({ text, path }) => ({
+    children: projectSeries.map(({ text, path }) => ({
       text,
-      link: `/projects/${path}.html`,
+      link: `/projects/${path}/`,
     })),
   },
   {
@@ -189,6 +182,9 @@ export const sidebar: SidebarOptions = {
     careerSeries.map(({ text, path }) => [`/career/${path}/`, structureSidebar(text)]),
   ),
   '/career/': structureSidebar('职场与面试'),
+  ...Object.fromEntries(
+    projectSeries.map(({ text, path }) => [`/projects/${path}/`, structureSidebar(text)]),
+  ),
   '/projects/': structureSidebar('项目'),
   '/about/': structureSidebar('关于'),
   '/bubble/': structureSidebar('泡泡'),

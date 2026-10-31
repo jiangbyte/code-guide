@@ -26,6 +26,9 @@ importers:
       markmap-view:
         specifier: ^0.18.12
         version: 0.18.12(markmap-common@0.18.9)
+      qrcode.vue:
+        specifier: ^3.11.0
+        version: 3.11.0(vue@3.5.44)
     devDependencies:
       '@iconify-json/mdi':
         specifier: ^1.2.3
@@ -36,16 +39,13 @@ importers:
       '@vuepress/bundler-vite':
         specifier: next
         version: 2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1)
-      '@vuepress/plugin-docsearch':
-        specifier: 2.0.0-rc.137
-        version: 2.0.0-rc.137(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))
       '@vuepress/plugin-feed':
         specifier: 2.0.0-rc.137
         version: 2.0.0-rc.137(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))
       '@vuepress/plugin-revealjs':
         specifier: 2.0.0-rc.137
         version: 2.0.0-rc.137(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(markdown-it@14.3.3)(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))
-      '@vuepress/plugin-slimsearch':
+      '@vuepress/plugin-search':
         specifier: 2.0.0-rc.137
         version: 2.0.0-rc.137(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))
       artplayer:
@@ -2419,6 +2419,11 @@ packages:
     resolution: {integrity: sha512-uxFIHU0YlHYhDQtV4R9J6a52SLx28BCjT+4ieh7IGbgwVJWO+km431c4yRlREUAsAmt/uMjQUyQHNEPf0M39CA==}
     engines: {node: '>=6'}
 
+  qrcode.vue@3.11.0:
+    resolution: {integrity: sha512-PnaO9yqcEVsH9euUmo4Nn0JZMkNwk4u6fDUosKjDTXv2Cgv7rHZhr2D8Iq54clBvSycOESwgUE/rw/tBRBjIVg==}
+    peerDependencies:
+      vue: ^3.0.0
+
   qrcode@1.5.4:
     resolution: {integrity: sha512-1ca71Zgiu6ORjHqFBDpnSMTR2ReToX4l1Au1VFLyVeBTFavzQnv5JxMFr3ukHVKpSrSA2MCk0lNJSykjUfz7Zg==}
     engines: {node: '>=10.13.0'}
@@ -3223,9 +3228,11 @@ snapshots:
       outvariant: 1.4.0
       static-browser-server: 1.0.3
 
-  '@docsearch/css@5.1.2': {}
+  '@docsearch/css@5.1.2':
+    optional: true
 
-  '@docsearch/js@5.1.2': {}
+  '@docsearch/js@5.1.2':
+    optional: true
 
   '@gera2ld/jsx-dom@2.2.2':
     dependencies:
@@ -4235,6 +4242,7 @@ snapshots:
       - '@vuepress/bundler-vite'
       - '@vuepress/bundler-webpack'
       - typescript
+    optional: true
 
   '@vuepress/plugin-feed@2.0.0-rc.137(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))':
     dependencies:
@@ -4594,7 +4602,6 @@ snapshots:
       - '@vuepress/bundler-vite'
       - '@vuepress/bundler-webpack'
       - typescript
-    optional: true
 
   '@vuepress/plugin-seo@2.0.0-rc.137(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))':
     dependencies:
@@ -4643,6 +4650,7 @@ snapshots:
       - '@vuepress/bundler-vite'
       - '@vuepress/bundler-webpack'
       - typescript
+    optional: true
 
   '@vuepress/plugin-theme-data@2.0.0-rc.135(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))':
     dependencies:
@@ -4663,6 +4671,7 @@ snapshots:
       - '@vuepress/bundler-vite'
       - '@vuepress/bundler-webpack'
       - typescript
+    optional: true
 
   '@vuepress/shared@2.0.0-rc.31':
     dependencies:
@@ -5761,6 +5770,10 @@ snapshots:
 
   punycode.js@2.3.1: {}
 
+  qrcode.vue@3.11.0(vue@3.5.44):
+    dependencies:
+      vue: 3.5.44
+
   qrcode@1.5.4:
     dependencies:
       dijkstrajs: 1.0.3
@@ -5998,7 +6011,8 @@ snapshots:
       arg: 5.0.2
       sax: 1.6.1
 
-  slimsearch@3.0.0: {}
+  slimsearch@3.0.0:
+    optional: true
 
   source-map-js@1.2.2: {}
 

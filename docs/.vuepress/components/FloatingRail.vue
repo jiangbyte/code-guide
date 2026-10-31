@@ -1,14 +1,28 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { RouteLink } from 'vuepress/client'
+import { RouteLink, useRoute } from 'vuepress/client'
 import { useRelatedLinks } from 'vuepress-theme-hope/client'
+import QrcodeVue from 'qrcode.vue'
+
+type RailPanel = 'wechat' | 'mobile' | null
 
 // 与文末 PageNav 同源（主题 App setup 已 provide 侧栏）
 const { prevLink, nextLink } = useRelatedLinks()
 const hasPageNav = computed(() => Boolean(prevLink.value || nextLink.value))
 
+const route = useRoute()
+
+/** 当前页完整 URL，供「手机看」二维码；服务端渲染时先空串 */
+const pageUrl = computed(() => {
+  if (typeof window === 'undefined') return ''
+  return `${window.location.origin}${route.fullPath}`
+})
+
 const aboutHref = '/about/me.html'
 const labels = {
+  mobile: '手机看',
+  mobileTitle: '微信扫一扫',
+  mobileDialog: '当前页二维码',
   wechat: '公众号',
   wechatPanel: '扫码关注公众号',
   wechatDialog: '微信公众号二维码',
@@ -22,7 +36,8 @@ const labels = {
   rail: '快捷入口',
 }
 
-const open = ref(false)
+/** 互斥：同一时间只开一个面板 */
+const panel = ref<RailPanel>(null)
 const showTop = ref(false)
 /** 窄屏：侧栏默认收起，仅留展开钮 */
 const isNarrow = ref(false)
@@ -40,11 +55,13 @@ function syncNarrow() {
     railOpen.value = false
     return
   }
+  // 进窄屏关闭「手机看」（该项本身也会隐藏）
+  if (panel.value === 'mobile') panel.value = null
 }
 
 function toggleRail() {
   railOpen.value = !railOpen.value
-  if (!railOpen.value) open.value = false
+  if (!railOpen.value) panel.value = null
 }
 
 function onScroll() {
@@ -55,16 +72,16 @@ function scrollTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
-function openWechat() {
-  open.value = true
+function openPanel(name: Exclude<RailPanel, null>) {
+  panel.value = name
 }
 
-function closeWechat() {
-  open.value = false
+function closePanel() {
+  panel.value = null
 }
 
-function toggleWechat() {
-  open.value = !open.value
+function togglePanel(name: Exclude<RailPanel, null>) {
+  panel.value = panel.value === name ? null : name
 }
 
 function canHoverOpen() {
@@ -75,18 +92,18 @@ function onDocPointer(e: Event) {
   const target = e.target as HTMLElement | null
   // 点在整个侧栏（含二维码面板）内不关闭
   if (target?.closest('.jb-rail')) return
-  open.value = false
+  panel.value = null
   // 窄屏展开态：点外侧一并收起，少挡正文
   if (isNarrow.value) railOpen.value = false
 }
 
 /** 仅精细指针设备用悬停展开，触屏只靠点击 */
-function onWechatEnter() {
-  if (canHoverOpen()) openWechat()
+function onPanelEnter(name: Exclude<RailPanel, null>) {
+  if (canHoverOpen()) openPanel(name)
 }
 
-function onWechatLeave() {
-  if (canHoverOpen()) closeWechat()
+function onPanelLeave(name: Exclude<RailPanel, null>) {
+  if (canHoverOpen() && panel.value === name) closePanel()
 }
 
 let narrowMql: MediaQueryList | null = null
@@ -146,18 +163,66 @@ onUnmounted(() => {
         :class="{ 'is-collapsed': isNarrow && !railOpen }"
       >
         <div class="jb-rail__stack">
+          <!-- 桌面：扫当前页到手机；窄屏已在手机上，不展示 -->
+          <div
+            v-if="!isNarrow"
+            class="jb-rail__item-wrap"
+            @mouseenter="onPanelEnter('mobile')"
+            @mouseleave="onPanelLeave('mobile')"
+          >
+            <button
+              type="button"
+              class="jb-rail__item jb-rail__item--mobile"
+              :aria-expanded="panel === 'mobile'"
+              aria-controls="jb-mobile-panel"
+              @pointerdown.stop
+              @click.stop.prevent="togglePanel('mobile')"
+            >
+              <span class="jb-rail__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="7" y="2.5" width="10" height="19" rx="2" />
+                  <path d="M10 5.5h4M11 18.5h2" stroke-linecap="round" />
+                </svg>
+              </span>
+              <span class="jb-rail__label">{{ labels.mobile }}</span>
+            </button>
+
+            <div
+              v-show="panel === 'mobile'"
+              id="jb-mobile-panel"
+              class="jb-rail__panel jb-rail__panel--mobile"
+              role="dialog"
+              :aria-label="labels.mobileDialog"
+              @click.stop
+            >
+              <p class="jb-rail__panel-title">{{ labels.mobileTitle }}</p>
+              <div class="jb-rail__qr jb-rail__qr--gen">
+                <QrcodeVue
+                  v-if="pageUrl"
+                  :value="pageUrl"
+                  :size="144"
+                  level="M"
+                  render-as="canvas"
+                />
+              </div>
+              <p class="jb-rail__panel-text jb-rail__panel-text--foot">
+                可以<strong>手机看</strong>或分享至<strong>朋友圈</strong>
+              </p>
+            </div>
+          </div>
+
           <div
             class="jb-rail__item-wrap"
-            @mouseenter="onWechatEnter"
-            @mouseleave="onWechatLeave"
+            @mouseenter="onPanelEnter('wechat')"
+            @mouseleave="onPanelLeave('wechat')"
           >
             <button
               type="button"
               class="jb-rail__item jb-rail__item--wechat"
-              :aria-expanded="open"
+              :aria-expanded="panel === 'wechat'"
               aria-controls="jb-wechat-panel"
               @pointerdown.stop
-              @click.stop.prevent="toggleWechat"
+              @click.stop.prevent="togglePanel('wechat')"
             >
               <span class="jb-rail__icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
@@ -170,7 +235,7 @@ onUnmounted(() => {
             </button>
 
             <div
-              v-show="open"
+              v-show="panel === 'wechat'"
               id="jb-wechat-panel"
               class="jb-rail__panel"
               role="dialog"

@@ -1,88 +1,9 @@
-import { existsSync, readFileSync } from 'node:fs'
-import { resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { viteBundler } from '@vuepress/bundler-vite'
 import { defineUserConfig } from 'vuepress'
 import { hopeTheme } from 'vuepress-theme-hope'
 import { navbar, sidebar } from './catalog'
 import { isSiteArticle } from './articleFilter'
 import { articleTimelinePlugin } from './plugins/articleTimeline'
-
-const rootDir = resolve(fileURLToPath(new URL('.', import.meta.url)), '../..')
-
-/**
- * 把仓库根目录的 .env / .env.local 载入 process.env（不覆盖已有环境变量）。
- */
-function loadEnvFiles() {
-  // 1. 先快照已有环境变量（CI / shell），这些键全程不覆盖
-  // 2. 再读 .env，最后读 .env.local（本地覆盖示例配置）
-  // 3. 只解析 KEY=VALUE，忽略空行与 # 注释
-  const preset = new Set(Object.keys(process.env))
-  for (const name of ['.env', '.env.local']) {
-    const file = resolve(rootDir, name)
-    if (!existsSync(file)) continue
-    for (const line of readFileSync(file, 'utf8').split(/\r?\n/)) {
-      const trimmed = line.trim()
-      if (!trimmed || trimmed.startsWith('#')) continue
-      const eq = trimmed.indexOf('=')
-      if (eq <= 0) continue
-      const key = trimmed.slice(0, eq).trim()
-      let value = trimmed.slice(eq + 1).trim()
-      if (
-        (value.startsWith('"') && value.endsWith('"')) ||
-        (value.startsWith("'") && value.endsWith("'"))
-      ) {
-        value = value.slice(1, -1)
-      }
-      if (!preset.has(key)) process.env[key] = value
-    }
-  }
-}
-
-loadEnvFiles()
-
-/** DocSearch 三项齐全时启用云端搜索，否则回退本地 slimsearch。 */
-function resolveSearchPlugins() {
-  // 1. 从环境变量读取；缺任一则不启用 DocSearch，避免半成品配置打进站点
-  // 2. 未配置时保留 slimsearch，本地预览仍有搜索框
-  const appId = process.env.DOCSEARCH_APP_ID?.trim()
-  const apiKey = process.env.DOCSEARCH_API_KEY?.trim()
-  const indexName = process.env.DOCSEARCH_INDEX_NAME?.trim()
-  if (appId && apiKey && indexName) {
-    return {
-      docsearch: {
-        appId,
-        apiKey,
-        indexName,
-      },
-    }
-  }
-  return {
-    slimsearch: {
-      indexContent: true,
-      locales: {
-        '/': {
-          placeholder: '搜索',
-        },
-      },
-    },
-  }
-}
-
-function fixSlimsearchWorker() {
-  return {
-    name: 'fix-slimsearch-worker',
-    transform(code: string, id: string) {
-      if (!id.includes('plugin-slimsearch') || !code.includes('worker/dev.js')) {
-        return null
-      }
-      return code.replace(
-        'new URL(`worker/dev.js`,import.meta.url)',
-        'new URL("../worker/dev.js", import.meta.url)',
-      )
-    },
-  }
-}
 
 export default defineUserConfig({
   lang: 'zh-CN',
@@ -95,18 +16,13 @@ export default defineUserConfig({
     ['meta', { name: 'keywords', content: '摸鱼猫泡泡,Charlie,技术文档,Java,Git,VuePress' }],
     ['meta', { name: 'author', content: 'Charlie' }],
     ['meta', { name: 'theme-color', content: '#e8913a' }],
-    ['meta', { name: 'algolia-site-verification', content: '61FEEB8C8F1345C1' }],
     ['link', { rel: 'icon', href: '/img/logo.png', type: 'image/png' }],
     ['link', { rel: 'apple-touch-icon', href: '/img/logo.png' }],
   ],
 
   bundler: viteBundler({
     viteOptions: {
-      plugins: [fixSlimsearchWorker()],
-      worker: {
-        format: 'es',
-      },
-      // elk / echarts 等图表分包本身 >1MB，属预期体积；提高阈值避免误报
+      // elk / echarts 等图表分包本身 >1MB，属预期体积；提高警告避免误报
       build: {
         chunkSizeWarningLimit: 1600,
       },
@@ -126,7 +42,7 @@ export default defineUserConfig({
         ],
       },
     },
-    // 确保覆盖 VuePress 内部 build 合并后的最终阈值
+    // 确保覆盖 VuePress 内部 build 合并后的最终警告
     configureVite: (config) => {
       config.build ??= {}
       config.build.chunkSizeWarningLimit = 1600
@@ -269,7 +185,16 @@ export default defineUserConfig({
         offline: true,
       },
 
-      ...resolveSearchPlugins(),
+      // 本地标题/大纲搜索：导航栏胶囊输入框 + 下拉标题与 > 小节
+      search: {
+        maxSuggestions: 10,
+        hotKeys: ['s', '/'],
+        locales: {
+          '/': {
+            placeholder: '搜索',
+          },
+        },
+      },
 
       components: {
         components: [
