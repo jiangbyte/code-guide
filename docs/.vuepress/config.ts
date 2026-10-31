@@ -287,11 +287,35 @@ export default defineUserConfig({
       },
       photoSwipe: true,
       readingTime: true,
+      // 复制正文达到一定长度时附加出处（可用 frontmatter copy: false 单页关闭）
       copyright: {
-        global: false,
+        global: true,
         author: 'Charlie',
-        license: 'MIT',
+        license: 'CC BY-NC 4.0',
+        canonical: 'https://jiangbyte.cn',
+        triggerLength: 100,
       },
+
+      // 全站公告；showOnce + key，改文案时换 key 才会再弹一次
+      notice: [
+        {
+          path: '/',
+          title: '欢迎来到摸鱼猫泡泡',
+          content:
+            '本站记录技术笔记与项目说明。内容可引用改编，须署名并附来源，禁止商用（CC BY-NC 4.0）。',
+          showOnce: true,
+          key: 'welcome-2026-10-v2',
+          actions: [
+            {
+              text: '关于本站',
+              link: '/about/site.html',
+              type: 'primary',
+            },
+            { text: '知道了' },
+          ],
+        },
+      ],
+
       feed: {
         atom: true,
         json: true,
