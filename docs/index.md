@@ -9,9 +9,6 @@ actions:
   - text: 个人简历
     link: /about/me.html
     type: primary
-  - text: GitHub
-    link: https://github.com/jiangbyte
-    type: default
 features:
   - title: 沉淀
     details: 技术笔记与踩坑记录。
@@ -26,4 +23,3 @@ features:
 - 做 AI 全栈研发，也写笔记。更多见 [关于自己](/about/me.html)。
 
 - 掘金：[juejin.cn](https://juejin.cn/user/1968540037686224)
-- GitHub：[jiangbyte](https://github.com/jiangbyte)

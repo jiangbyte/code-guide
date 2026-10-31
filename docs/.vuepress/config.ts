@@ -79,7 +79,7 @@ export default defineUserConfig({
     navbarLayout: {
       start: ['Brand', 'Links'],
       center: [],
-      end: ['Repo', 'Search'],
+      end: ['Search'],
     },
 
     navbarTitle: '摸鱼猫泡泡',
