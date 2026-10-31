@@ -157,10 +157,13 @@ export default defineUserConfig({
     contributors: true,
     editLink: true,
 
+    // 固定浅色，不提供深色 / 自动切换
+    darkmode: 'disable',
+
     navbarLayout: {
       start: ['Brand', 'Links'],
       center: [],
-      end: ['Repo', 'Outlook', 'Search'],
+      end: ['Repo', 'Search'],
     },
 
     navbarTitle: '摸鱼猫泡泡',
