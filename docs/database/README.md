@@ -1,6 +1,6 @@
 ---
 title: 数据库
-description: 数据库相关笔记：安装、复制与常用运维。
+description: 数据库相关笔记。
 index: false
 dir:
   text: 数据库

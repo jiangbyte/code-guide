@@ -1,9 +1,9 @@
 ---
-title: Practice
-description: Practice 系列笔记。
+title: 实践
+description: 实践系列笔记。
 index: false
 dir:
-  text: Practice
+  text: 实践
   collapsible: false
   expanded: true
 ---

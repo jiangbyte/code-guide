@@ -1,10 +1,10 @@
 import type { NavbarOptions, SidebarOptions } from 'vuepress-theme-hope'
 
 export const postSeries = [
-  { text: 'Tools', path: 'tools' },
-  { text: 'Practice', path: 'practice' },
-  { text: 'Embedded', path: 'embedded' },
-  { text: 'Ops', path: 'ops' },
+  { text: '工具', path: 'tools' },
+  { text: '实践', path: 'practice' },
+  { text: '嵌入式', path: 'embedded' },
+  { text: '运维', path: 'ops' },
 ] as const
 
 /** 源码阅读 · 子系列 */

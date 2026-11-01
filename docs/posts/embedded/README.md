@@ -1,9 +1,9 @@
 ---
-title: Embedded
-description: Embedded 系列笔记。
+title: 嵌入式
+description: 嵌入式系列笔记。
 index: false
 dir:
-  text: Embedded
+  text: 嵌入式
   collapsible: false
   expanded: true
 ---

@@ -1,9 +1,9 @@
 ---
-title: Ops
-description: Ops 系列笔记。
+title: 运维
+description: 运维系列笔记。
 index: false
 dir:
-  text: Ops
+  text: 运维
   collapsible: false
   expanded: true
 ---

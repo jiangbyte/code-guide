@@ -1,6 +1,6 @@
 ---
 title: Redis
-description: Redis 安装与运维笔记。
+description: Redis 相关笔记。
 index: false
 dir:
   text: Redis
@@ -8,4 +8,4 @@ dir:
   expanded: true
 ---
 
-Redis 安装与运维相关笔记。
+Redis 相关笔记。
