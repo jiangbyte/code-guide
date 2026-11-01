@@ -1,4 +1,4 @@
-/** 与 SEO isArticle、时间线共用的「算文章」规则。 */
+/** 与 SEO isArticle、Blog 文章过滤共用的「算文章」规则。 */
 
 const ARTICLE_PREFIXES = [
   'posts/',
@@ -11,7 +11,7 @@ const ARTICLE_PREFIXES = [
 ] as const
 
 /**
- * 是否计入全站文章时间线 / SEO article。
+ * 是否计入 Blog / SEO article。
  * 排除各目录 README 与站点根 README。
  */
 export function isSiteArticle(filePathRelative: string | null | undefined): boolean {

@@ -2,8 +2,8 @@
 title: "Debian13-GNOME安装Fcitx5-Rime简体拼音"
 date: 2026-10-01
 description: "记录时间：2026-10-26"
-category: Ops
-tag: [Ops, debian-dev-box]
+category: 运维
+tag: [运维, debian-dev-box]
 cover: "https://t.alcy.cc/fj?u=9bc24353"
 ---
 # Debian 13 GNOME 安装 Fcitx5 + Rime（简体拼音）并登录自启

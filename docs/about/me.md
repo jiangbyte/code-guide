@@ -1,9 +1,11 @@
 ---
-title: 关于自己
+title: 关于我
 description: 关于 Charlie：从事 AI 全栈研发，也写笔记。
+article: true
+star: true
 ---
 
-# 关于自己
+# 关于我
 
 Hi，我是 **Charlie**。
 

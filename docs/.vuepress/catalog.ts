@@ -68,6 +68,16 @@ function structureSidebar(text: string) {
 export const navbar: NavbarOptions = [
   { text: '首页', link: '/', exact: true },
   {
+    text: '博客',
+    children: [
+      { text: '文章', link: '/article/' },
+      { text: '分类', link: '/category/' },
+      { text: '标签', link: '/tag/' },
+      { text: '文章时间线', link: '/blog-timeline/' },
+      { text: '站点时间线', link: '/site-timeline.html' },
+    ],
+  },
+  {
     text: '笔记',
     prefix: '/posts/',
     children: postSeries.map(({ text, path }) => ({
@@ -135,20 +145,12 @@ export const navbar: NavbarOptions = [
       link: `/projects/${path}/`,
     })),
   },
-  {
-    text: '时间线',
-    prefix: '/timeline/',
-    children: [
-      { text: '文章时间线', link: '/timeline/articles.html' },
-      { text: '站点时间线', link: '/timeline/site.html' },
-    ],
-  },
   { text: '泡泡', link: '/bubble/' },
   {
     text: '关于',
     prefix: '/about',
     children: [
-      { text: '关于自己', link: '/about/me.html' },
+      { text: '关于我', link: '/about/me.html' },
       { text: '关于本站', link: '/about/site.html' },
     ],
   },
@@ -188,5 +190,4 @@ export const sidebar: SidebarOptions = {
   '/projects/': structureSidebar('项目'),
   '/about/': structureSidebar('关于'),
   '/bubble/': structureSidebar('泡泡'),
-  '/timeline/': structureSidebar('时间线'),
 }

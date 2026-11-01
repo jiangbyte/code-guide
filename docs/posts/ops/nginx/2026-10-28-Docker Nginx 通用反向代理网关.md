@@ -2,8 +2,8 @@
 title: "Docker Nginx 通用反向代理网关"
 date: 2026-10-28
 description: "用官方 nginx 镜像做统一入口：只占 80/443，主站静态、子域按需反代；文中用【域名】【IP】占位，文末一键脚本可直接改两行执行。"
-category: Ops
-tag: [Ops, nginx, docker, gateway]
+category: 运维
+tag: [运维, nginx, docker, gateway]
 cover: "https://t.alcy.cc/fj?u=a1b2c3d4"
 ---
 

@@ -1,5 +1,4 @@
 import { defineClientConfig } from 'vuepress/client'
-import ArticleTimeline from './components/ArticleTimeline.vue'
 import Bilibili from './components/Bilibili.vue'
 import FloatingRail from './components/FloatingRail.vue'
 import SiteTimeline from './components/SiteTimeline.vue'
@@ -132,7 +131,6 @@ function mountMermaidZoom(root: ParentNode = document): void {
 export default defineClientConfig({
   enhance({ app, router }) {
     app.component('Bilibili', Bilibili)
-    app.component('ArticleTimeline', ArticleTimeline)
     app.component('SiteTimeline', SiteTimeline)
 
     if (typeof window !== 'undefined') {

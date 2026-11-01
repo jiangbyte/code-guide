@@ -2,7 +2,7 @@
 title: "用 conda 固定默认环境 normal"
 date: 2026-10-01
 description: "机器上同时有三套 Python 很容易搅在一起："
-category: Tools
+category: 工具
 tag: [Conda]
 cover: "https://t.alcy.cc/fj?u=6350a723"
 ---

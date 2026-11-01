@@ -3,7 +3,7 @@ title: "RuoYi-Vue-Plus"
 date: 2026-09-08
 order: 1
 description: "dromara/RuoYi-Vue-Plus 的同步 Fork，配套定制前端 plus-ui，定期对齐上游 6.X。"
-category: Project
+category: 项目
 tag: [Java, Spring Boot, Sa-Token, MyBatis-Plus, RuoYi, Fork]
 cover: "https://t.alcy.cc/fj?u=c3d8f12a"
 ---

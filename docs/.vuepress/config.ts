@@ -3,14 +3,11 @@ import { defineUserConfig } from 'vuepress'
 import { hopeTheme } from 'vuepress-theme-hope'
 import { navbar, sidebar } from './catalog'
 import { isSiteArticle } from './articleFilter'
-import { articleTimelinePlugin } from './plugins/articleTimeline'
 
 export default defineUserConfig({
   lang: 'zh-CN',
   title: '摸鱼猫泡泡',
   description: '摸鱼猫泡泡：记录 Java、工具与工程实践。',
-
-  plugins: [articleTimelinePlugin()],
 
   head: [
     ['meta', { name: 'keywords', content: '摸鱼猫泡泡,Charlie,技术文档,Java,Git,VuePress' }],
@@ -87,6 +84,20 @@ export default defineUserConfig({
     sidebar,
     metaLocales: {
       toc: '本页目录',
+    },
+
+    // Blog 模式（plugins.blog 开启后生效）
+    blog: {
+      name: 'Charlie',
+      avatar: '/img/logo.png',
+      description: '记录、实践与思考。',
+      intro: '/about/me.html',
+      medias: {
+        GitHub: 'https://github.com/jiangbyte',
+        Gitee: 'https://gitee.com/jiangbyte',
+      },
+      articlePerPage: 10,
+      timeline: '昨日不在',
     },
 
     displayFooter: true,
@@ -174,7 +185,18 @@ export default defineUserConfig({
     },
 
     plugins: {
-      blog: false,
+      blog: {
+        // 与 SEO 同一套「算文章」规则
+        filter: ({ filePathRelative, frontmatter }) => {
+          if (frontmatter.article === false) return false
+          if (frontmatter.article === true) return true
+          return isSiteArticle(filePathRelative)
+        },
+        // 关闭正文截取；卡片概述只用 frontmatter.description
+        excerptLength: 0,
+        // 避免占用站点其它路径；导航里「文章时间线」指向此处
+        timeline: '/blog-timeline/',
+      },
       comment: false,
       git: true,
 

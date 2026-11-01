@@ -1,5 +1,45 @@
 @use "@sass-palette/hope-config";
 
+/* 全站滚动条：中性灰，覆盖主题侧栏等强调色 */
+*,
+*::before,
+*::after,
+.vp-sidebar,
+.vp-toc-wrapper,
+.vp-blog-infos,
+.vp-page {
+  scrollbar-width: thin;
+  scrollbar-color: var(--vp-c-border) transparent !important;
+}
+
+*::-webkit-scrollbar,
+.vp-sidebar::-webkit-scrollbar,
+.vp-toc-wrapper::-webkit-scrollbar,
+.vp-blog-infos::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-thumb,
+.vp-sidebar::-webkit-scrollbar-thumb,
+.vp-toc-wrapper::-webkit-scrollbar-thumb,
+.vp-blog-infos::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: var(--vp-c-border) !important;
+}
+
+*::-webkit-scrollbar-thumb:hover,
+.vp-sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-border) !important;
+}
+
+*::-webkit-scrollbar-track,
+.vp-sidebar::-webkit-scrollbar-track,
+.vp-toc-wrapper::-webkit-scrollbar-track,
+.vp-blog-infos::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
 .vp-site-name {
   font-weight: 700;
 }
@@ -470,6 +510,200 @@
   padding-top: 0.15rem;
 }
 
+/* Blog 文章卡片封面：压低高度，裁切居中 */
+.vp-article-cover {
+  display: block;
+  height: 8.5rem;
+  max-height: 8.5rem;
+  object-fit: cover;
+  object-position: center;
+
+  @media (max-width: hope-config.$pad) {
+    height: 7.25rem;
+    max-height: 7.25rem;
+  }
+}
+
+.vp-article-excerpt {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--vp-c-text-mute);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* 分页器 mini：悬浮风 + 小尺寸，尽量单行 */
+.vp-pagination {
+  margin: 0.85rem 0 0.5rem;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.vp-pagination-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.vp-pagination-number,
+.vp-pagination-nav {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 1.75rem;
+  min-height: 1.75rem;
+  margin: 0;
+  border: 0;
+  border-radius: 6px;
+  background: var(--vp-c-bg);
+  box-shadow: 0 1px 4px var(--vp-c-shadow);
+}
+
+.vp-pagination-number {
+  overflow: hidden;
+  padding: 0;
+
+  div {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 1.6rem;
+    height: 100%;
+    padding: 0 0.4rem;
+    border: 0;
+    background: transparent;
+    color: var(--vp-c-text);
+    text-align: center;
+    cursor: pointer;
+    transition:
+      color 0.15s,
+      background-color 0.15s;
+
+    &::before {
+      display: none;
+    }
+
+    &:hover:not(.ellipsis):not(.active) {
+      color: var(--vp-c-accent);
+      background: var(--vp-c-bg-alt);
+    }
+
+    &.active {
+      background: var(--vp-c-accent-soft);
+      color: var(--vp-c-accent);
+      cursor: default;
+    }
+
+    &.prev,
+    &.next {
+      font-size: 12px;
+      padding: 0 0.5rem;
+      white-space: nowrap;
+    }
+
+    &.ellipsis {
+      min-width: 1.25rem;
+      cursor: default;
+
+      &:hover {
+        color: var(--vp-c-text);
+        background: transparent;
+      }
+    }
+  }
+}
+
+.vp-pagination-nav {
+  gap: 4px;
+  padding: 0 4px 0 8px;
+  color: var(--vp-c-text-mute);
+
+  label {
+    font-size: 12px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  input {
+    box-sizing: border-box;
+    width: 2.25rem;
+    height: 1.35rem;
+    margin: 0;
+    border: 0;
+    border-radius: 4px;
+    background: var(--vp-c-bg-alt);
+    color: var(--vp-c-text);
+    outline: none;
+    font-size: 12px;
+    line-height: 1.35rem;
+    text-align: center;
+
+    &:focus {
+      box-shadow: inset 0 0 0 1px var(--vp-c-border);
+    }
+  }
+}
+
+.vp-pagination-button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: 1.35rem;
+  margin: 0;
+  padding: 0 0.45rem;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--vp-c-text);
+  outline: none;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    background-color 0.15s;
+
+  &:hover {
+    color: var(--vp-c-accent);
+    background: var(--vp-c-bg-alt);
+  }
+}
+
+/* 首页：项目卡片 ↔ 文章卡片间距对齐文章列表间距（覆盖主题 navbar 顶距公式） */
+.vp-blog-home {
+  .vp-project-panel {
+    margin-bottom: 0 !important;
+  }
+
+  /* 去掉项目卡底边 6px，避免叠在 1.25rem 上偏大 */
+  .vp-project-card {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .vp-blog-main .vp-article-list {
+    margin-top: 1.25rem !important;
+    padding-top: 0 !important;
+  }
+
+  @media (max-width: hope-config.$pad) {
+    .vp-blog-main .vp-article-list {
+      margin-top: 1rem !important;
+    }
+  }
+}
+
 .vp-breadcrumb + .vp-page-title {
   padding-top: 0.75rem;
 
@@ -479,16 +713,6 @@
 }
 
 .vp-sidebar {
-  scrollbar-color: var(--vp-c-border) transparent;
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--vp-c-border);
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
   .vp-sidebar-link {
     width: 100%;
     margin-inline: 0;

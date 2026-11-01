@@ -3,7 +3,7 @@ title: "Startpage"
 date: 2026-09-06
 order: 4
 description: "无数据库的个人书签导航起始页"
-category: Project
+category: 项目
 tag: [Vite, React, TypeScript]
 cover: "https://t.alcy.cc/fj?u=6b8fef9b"
 ---

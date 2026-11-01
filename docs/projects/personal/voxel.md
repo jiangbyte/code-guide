@@ -3,7 +3,7 @@ title: "Voxel"
 date: 2026-10-01
 order: 7
 description: "Portal / Admin 分仓的 DDD 七层全栈脚手架系列"
-category: Project
+category: 项目
 tag: [DDD, Spring Boot, FastAPI, Gin, Vue, React]
 cover: "https://t.alcy.cc/fj?u=a53ea23e"
 ---

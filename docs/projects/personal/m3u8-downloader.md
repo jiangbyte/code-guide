@@ -3,7 +3,7 @@ title: "M3U8 Downloader"
 date: 2026-09-18
 order: 2
 description: "跨平台桌面端 m3u8 多线程下载器"
-category: Project
+category: 项目
 tag: [Tauri, Rust, React, HLS]
 cover: "https://t.alcy.cc/fj?u=6a37132a"
 ---

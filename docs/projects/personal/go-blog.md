@@ -3,7 +3,7 @@ title: "go-blog"
 date: 2026-10-28
 order: 1
 description: "个人博客全栈系统：Go（Gin + GORM）+ Vue 前台 / 管理端 / 简历站。"
-category: Project
+category: 项目
 tag: [Go, Gin, GORM, Vue, Naive UI]
 cover: "https://t.alcy.cc/fj?u=d2c2293f"
 ---

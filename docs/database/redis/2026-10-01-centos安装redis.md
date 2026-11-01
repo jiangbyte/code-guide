@@ -2,8 +2,8 @@
 title: "centos安装redis"
 date: 2026-10-01
 description: "CentOS 7 默认源里没有 Redis，得自己想办法。这篇整理了几种装法，从最省事的 Yum 到手动编译，看情况选就行。"
-category: Ops
-tag: [Ops, redis]
+category: 数据库
+tag: [数据库, redis]
 cover: "https://t.alcy.cc/fj?u=bdf457a9"
 ---
 ## 先说背景

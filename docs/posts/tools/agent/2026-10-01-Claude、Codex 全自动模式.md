@@ -2,7 +2,7 @@
 title: "Claude、Codex 全自动模式"
 date: 2026-10-01
 description: "\\\"YOLO 模式\\\"（或叫\\\"全自动模式\\\"）是为了让 AI 编程助手在不经你逐次确认的情况下，全自动执行指令。Codex 和 Claude Code 都有各自的开启方式，但核心逻辑和风险是一样的。"
-category: Tools
+category: 工具
 tag: [Agent]
 cover: "https://t.alcy.cc/fj?u=714d3380"
 ---

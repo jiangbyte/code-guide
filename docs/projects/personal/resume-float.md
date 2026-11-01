@@ -3,7 +3,7 @@ title: "ResumeFloat"
 date: 2026-09-18
 order: 6
 description: "跨平台置顶悬浮简历速拷工具"
-category: Project
+category: 项目
 tag: [Tauri, React, SQLite]
 cover: "https://t.alcy.cc/fj?u=1dc40b53"
 ---

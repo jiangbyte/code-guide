@@ -3,7 +3,7 @@ title: "SparkSandbox"
 date: 2026-08-31
 order: 3
 description: "Linux 隔离执行 HTTP 服务：编译、限资源运行与多测例"
-category: Project
+category: 项目
 tag: [C++, FastAPI, Sandbox, Linux]
 cover: "https://t.alcy.cc/fj?u=cb826ae3"
 ---
