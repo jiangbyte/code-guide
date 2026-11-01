@@ -5,7 +5,6 @@ order: 1
 description: "摸鱼猫泡泡 · VuePress Theme Hope 站点。"
 category: 项目
 tag: [VuePress, Theme Hope, Markdown]
-cover: "https://t.alcy.cc/fj?u=63557b3d"
 ---
 
 - 仓库：<https://github.com/jiangbyte/code-guide>

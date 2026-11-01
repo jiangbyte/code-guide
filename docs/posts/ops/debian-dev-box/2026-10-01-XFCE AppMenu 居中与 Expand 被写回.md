@@ -4,7 +4,6 @@ date: 2026-10-01
 description: "顶栏装了 AppMenu Plugin 之后："
 category: 运维
 tag: [运维, debian-dev-box]
-cover: "https://t.alcy.cc/fj?u=adfc4163"
 ---
 ## 现象
 

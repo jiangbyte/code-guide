@@ -4,7 +4,6 @@ date: 2026-10-07
 description: "主机 dev（Debian 13 + GNOME X11）安装 ugeetablet 4.3 后画笔失效：内核争用、uinput 权限，以及随后 HVUG STYLUS 变成 floating 导致有压感无位移。结论与配置均来自本机命令与日志。"
 category: 运维
 tag: [运维, debian-dev-box, Debian, 数位板, ugee, XP-Pen]
-cover: "https://t.alcy.cc/fj?u=c069256f"
 ---
 ## 环境
 

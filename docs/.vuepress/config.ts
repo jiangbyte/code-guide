@@ -19,7 +19,7 @@ export default defineUserConfig({
 
   bundler: viteBundler({
     viteOptions: {
-      // elk / echarts 等图表分包本身 >1MB，属预期体积；提高警告避免误报
+      // mermaid 分包偏大，属预期；提高警告阈值避免误报
       build: {
         chunkSizeWarningLimit: 1600,
       },
@@ -30,16 +30,9 @@ export default defineUserConfig({
           'dayjs/plugin/advancedFormat.js',
           'dayjs/plugin/customParseFormat.js',
           'dayjs/plugin/isoWeek.js',
-          'chart.js',
-          'echarts',
-          'flowchart.ts',
-          'markmap-lib',
-          'markmap-view',
-          'markmap-toolbar',
         ],
       },
     },
-    // 确保覆盖 VuePress 内部 build 合并后的最终警告
     configureVite: (config) => {
       config.build ??= {}
       config.build.chunkSizeWarningLimit = 1600
@@ -116,7 +109,7 @@ export default defineUserConfig({
     copyright: false,
 
     markdown: {
-      // GitHub 风格代码高亮；conf 映射到 ini
+      // GitHub 风格代码高亮；别名映射到 Shiki 内置语言 id
       highlighter: {
         type: 'shiki',
         themes: {
@@ -125,6 +118,8 @@ export default defineUserConfig({
         },
         langAlias: {
           conf: 'ini',
+          // 正文常用 ```sshconfig，Shiki 官方 id 是 ssh-config
+          sshconfig: 'ssh-config',
         },
       },
 
@@ -142,7 +137,6 @@ export default defineUserConfig({
       tabs: true,
       alert: true,
       hint: true,
-      revealjs: true,
 
       figure: true,
       imgLazyload: true,
@@ -163,20 +157,20 @@ export default defineUserConfig({
       fileTree: true,
       codeTree: true,
       preview: true,
-      demo: true,
-      playground: {
-        presets: ['ts', 'vue', 'unocss'],
-      },
+      demo: false,
+      playground: false,
       vuePlayground: false,
       sandpack: false,
       kotlinPlayground: false,
+      revealjs: false,
 
+      // 正文在用；其余图表未用，关闭以减包
       mermaid: true,
-      chartjs: true,
-      echarts: true,
-      flowchart: true,
-      markmap: true,
-      plantuml: true,
+      chartjs: false,
+      echarts: false,
+      flowchart: false,
+      markmap: false,
+      plantuml: false,
 
       math: {
         type: 'katex',
@@ -219,18 +213,12 @@ export default defineUserConfig({
       },
 
       components: {
-        components: [
-          'Badge',
-          'VPCard',
-          'SiteInfo',
-          'VPBanner',
-          'Share',
-          'CodePen',
-          'StackBlitz',
-        ],
+        // 仅保留轻量常用组件；CodePen / StackBlitz / Share 等嵌入已关
+        components: ['Badge', 'VPCard'],
       },
+      // 不启用主题内置 bilibili/youtube 嵌入；自定义 <Bilibili> 仍可用
       media: {
-        embeds: ['bilibili', 'youtube'],
+        embeds: [],
       },
       photoSwipe: true,
       readingTime: true,

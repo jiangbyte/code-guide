@@ -5,7 +5,6 @@ order: 6
 description: "跨平台置顶悬浮简历速拷工具"
 category: 项目
 tag: [Tauri, React, SQLite]
-cover: "https://t.alcy.cc/fj?u=1dc40b53"
 ---
 - 仓库：<https://github.com/jiangbyte/ResumeFloat>
 

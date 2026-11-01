@@ -4,7 +4,6 @@ date: 2026-10-30
 description: "为本站配置 SSH Host 别名与部署私钥，配合 scripts/deploy.sh 一键构建并 rsync；记录密钥损坏与 agent 拒签的排障。"
 category: 运维
 tag: [运维, nginx, vuepress, deploy, ssh, rsync]
-cover: "https://t.alcy.cc/fj?u=e1f2a3b4"
 ---
 
 ## 占位符

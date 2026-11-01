@@ -4,7 +4,6 @@ date: 2026-10-31
 description: "在 Debian 13 上从 ST 官方 Linux 包安装 CubeCLT 1.22 与 CubeMX 6.11：解压、接受许可、静默安装、配 PATH，并用 ST-LINK 验证。"
 category: 嵌入式
 tag: [嵌入式, STM32, CubeCLT, CubeMX]
-cover: "https://t.alcy.cc/fj?u=a7c2e91b"
 ---
 
 ## 目标

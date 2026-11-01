@@ -5,7 +5,6 @@ order: 1
 description: "RuoYi-Vue-Plus 官方前端 plus-ui 的 Fork：扁平直角 UI 与交互微调，定期合并上游。"
 category: 项目
 tag: [Vue, TypeScript, Element Plus, RuoYi, Fork]
-cover: "https://t.alcy.cc/fj?u=b7e4a91c"
 ---
 
 - 仓库：<https://github.com/jiangbyte/plus-ui>

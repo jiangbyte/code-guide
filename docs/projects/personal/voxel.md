@@ -5,7 +5,6 @@ order: 7
 description: "Portal / Admin 分仓的 DDD 七层全栈脚手架系列"
 category: 项目
 tag: [DDD, Spring Boot, FastAPI, Gin, Vue, React]
-cover: "https://t.alcy.cc/fj?u=a53ea23e"
 ---
 **Voxel** 是一组按同一领域分层重建的全栈脚手架系列：**Portal 与 Admin 独立后端、独立前端**，目录、坐标与包名统一为 `voxel-*` / `io.github.jiangbyte.voxel`。后端对齐 Java（Spring Boot）、Python（FastAPI）、Go（Gin）；前端对齐 Vue 3 管理端、React 门户与 uni-app。另有七层纯骨架与带账户竖切的充实模板，供对照学习，不作业务拷贝范本。协议 Apache License 2.0。
 

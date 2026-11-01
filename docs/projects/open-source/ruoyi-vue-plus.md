@@ -5,7 +5,6 @@ order: 1
 description: "dromara/RuoYi-Vue-Plus 的同步 Fork，配套定制前端 plus-ui，定期对齐上游 6.X。"
 category: 项目
 tag: [Java, Spring Boot, Sa-Token, MyBatis-Plus, RuoYi, Fork]
-cover: "https://t.alcy.cc/fj?u=c3d8f12a"
 ---
 
 - 仓库：<https://github.com/jiangbyte/RuoYi-Vue-Plus>

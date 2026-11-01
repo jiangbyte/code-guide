@@ -5,7 +5,6 @@ order: 3
 description: "Linux 隔离执行 HTTP 服务：编译、限资源运行与多测例"
 category: 项目
 tag: [C++, FastAPI, Sandbox, Linux]
-cover: "https://t.alcy.cc/fj?u=cb826ae3"
 ---
 - 仓库：<https://github.com/jiangbyte/SparkSandbox>
 

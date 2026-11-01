@@ -4,7 +4,6 @@ date: 2026-10-04
 description: "从自带 github 主题复制出 github-cus，改成掘金风格行内代码，并用 CSS counter 给正文与大纲侧栏做从 h2 起的自动编号。"
 category: 工具
 tag: [Typora]
-cover: "https://t.alcy.cc/fj?u=35cc7ac8"
 ---
 Typora 自带主题升级会覆盖，直接改 `github.css` 不稳妥。做法是复制一份自定义主题 `github-cus`，在上面改行内代码颜色，以及正文 / 大纲的标题自动编号。
 

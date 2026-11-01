@@ -4,7 +4,6 @@ date: 2026-10-01
 description: "已配好 Debian 软件源（见 02 配置 Debian 软件源） 确认代号："
 category: 运维
 tag: [运维, debian-dev-box]
-cover: "https://t.alcy.cc/fj?u=ed7b3fca"
 ---
 ## 前置
 

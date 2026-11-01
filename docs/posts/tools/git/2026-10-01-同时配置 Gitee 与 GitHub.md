@@ -4,7 +4,6 @@ date: 2026-10-01
 description: "开发机上经常要同时推 Gitee、GitHub，有时还要接阿里云 Codeup。默认只会用 ~/.ssh/idrsa，多平台共用一把钥匙容易乱；更稳妥的做法是：每平台一把密钥，用 ~/.ssh/config 按 Host 分流。"
 category: 工具
 tag: [Git]
-cover: "https://t.alcy.cc/fj?u=f85709f4"
 ---
 开发机上经常要同时推 Gitee、GitHub，有时还要接阿里云 Codeup。默认只会用 `~/.ssh/id_rsa`，多平台共用一把钥匙容易乱；更稳妥的做法是：**每平台一把密钥，用 `~/.ssh/config` 按 Host 分流**。
 

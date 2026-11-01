@@ -5,7 +5,6 @@ order: 5
 description: "AI 桌面运维工作台：主机、终端、SFTP 与 LangGraph Agent"
 category: 项目
 tag: [Tauri, Rust, LangGraph, 运维]
-cover: "https://t.alcy.cc/fj?u=78f30f7b"
 ---
 - 仓库：<https://github.com/jiangbyte/xuanjian>
 

@@ -5,7 +5,6 @@ order: 2
 description: "跨平台桌面端 m3u8 多线程下载器"
 category: 项目
 tag: [Tauri, Rust, React, HLS]
-cover: "https://t.alcy.cc/fj?u=6a37132a"
 ---
 - 仓库：<https://github.com/jiangbyte/M3u8Downloader>
 

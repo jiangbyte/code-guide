@@ -4,7 +4,6 @@ date: 2026-10-01
 description: "在 Windows 上用 Cursor 打开 WSL 项目时，左下角一直转圈，等待比较久......好像也没有安装好，检查 ~/.cursor-server/bin/ 目录，发现 commit id 的目录是空的，说明自动下载失败了。这在国…"
 category: 工具
 tag: [Agent]
-cover: "https://t.alcy.cc/fj?u=247cb10d"
 ---
 ## 先说问题
 

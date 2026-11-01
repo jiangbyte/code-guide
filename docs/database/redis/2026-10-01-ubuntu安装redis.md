@@ -4,7 +4,6 @@ date: 2026-10-01
 description: "Ubuntu 比 CentOS 省心点，APT 源里直接有 Redis，不用额外加仓库。不过版本可能不是最新的，想尝鲜还是得自己编译。"
 category: 数据库
 tag: [数据库, redis]
-cover: "https://t.alcy.cc/fj?u=0394a555"
 ---
 ## 先说背景
 

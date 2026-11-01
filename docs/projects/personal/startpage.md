@@ -5,7 +5,6 @@ order: 4
 description: "无数据库的个人书签导航起始页"
 category: 项目
 tag: [Vite, React, TypeScript]
-cover: "https://t.alcy.cc/fj?u=6b8fef9b"
 ---
 - 仓库：<https://github.com/jiangbyte/startpage>
 - 主页：<https://jiangbyte.github.io/startpage/>

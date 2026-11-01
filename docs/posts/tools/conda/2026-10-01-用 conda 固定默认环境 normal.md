@@ -4,7 +4,6 @@ date: 2026-10-01
 description: "机器上同时有三套 Python 很容易搅在一起："
 category: 工具
 tag: [Conda]
-cover: "https://t.alcy.cc/fj?u=6350a723"
 ---
 ## 先说目标
 

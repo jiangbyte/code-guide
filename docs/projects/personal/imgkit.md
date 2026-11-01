@@ -5,7 +5,6 @@ order: 0
 description: "即时、无落盘图像处理：Favicon / 压缩 / 缩放 / 格式转换，FastAPI + Vue3 单进程。"
 category: 项目
 tag: [Python, FastAPI, Vue, Pillow]
-cover: "https://t.alcy.cc/fj?u=a8f1c02e"
 ---
 
 - 仓库：<https://github.com/jiangbyte/imgkit>

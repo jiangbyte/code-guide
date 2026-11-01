@@ -4,7 +4,6 @@ date: 2026-10-01
 description: "最近用 Spring AI 做了一套 RAG 知识库对话：后台管理多知识库和文件上传，对话侧支持会话记忆、按知识库过滤检索，以及 SSE 流式输出。骨架还是原来的 DDD-lite Spring Boot 分层。"
 category: 实践
 tag: [实践]
-cover: "https://t.alcy.cc/fj?u=c0955832"
 ---
 最近用 Spring AI 做了一套 RAG 知识库对话：后台管理多知识库和文件上传，对话侧支持会话记忆、按知识库过滤检索，以及 SSE 流式输出。骨架还是原来的 DDD-lite Spring Boot 分层。
 

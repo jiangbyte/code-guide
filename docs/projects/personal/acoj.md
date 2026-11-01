@@ -5,7 +5,6 @@ order: 8
 description: "在线评测平台：题库、提交、多执行机调度与双端门户"
 category: 项目
 tag: [OJ, Spring Boot, Vue, React]
-cover: "https://t.alcy.cc/fj?u=04ccb8af"
 ---
 - 仓库：<https://github.com/jiangbyte/acoj>
 

@@ -4,7 +4,6 @@ date: 2026-10-01
 description: "机器：Debian 13（trixie）+ XFCE，原先用 LightDM + lightdm-gtk-greeter。"
 category: 运维
 tag: [运维, debian-dev-box]
-cover: "https://t.alcy.cc/fj?u=2751fc2c"
 ---
 ## 目标与边界
 
