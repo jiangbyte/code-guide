@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { frameworks, friends, type FriendLink } from '../data/friends'
+import { computed, ref } from 'vue'
+import { frameworks, friends, selfSite, type FriendLink } from '../data/friends'
 
 const APPLY_MAIL =
   'mailto:jiangbytebiz@163.com' +
@@ -20,6 +20,28 @@ const APPLY_MAIL =
 
 const friendCount = computed(() => friends.length)
 const frameworkCount = computed(() => frameworks.length)
+
+/** 本站字段行：标签 + 值，统一走复制逻辑 */
+const selfFields = computed(() => [
+  { key: 'name', label: '名称', value: selfSite.name },
+  { key: 'desc', label: '描述', value: selfSite.desc },
+  { key: 'url', label: '链接', value: selfSite.url },
+  { key: 'logo', label: 'Logo', value: selfSite.logo },
+])
+
+/** 一整段可粘贴文本，方便对方直接发邮件 / 填表 */
+const selfSiteBlock = computed(() =>
+  [
+    `名称：${selfSite.name}`,
+    `描述：${selfSite.desc}`,
+    `链接：${selfSite.url}`,
+    `Logo：${selfSite.logo}`,
+  ].join('\n'),
+)
+
+/** 最近一次复制成功的标记：字段 key 或 `all`；空串表示无反馈 */
+const copiedKey = ref('')
+let copiedTimer: ReturnType<typeof setTimeout> | undefined
 
 /**
  * 把列表铺到足够长，供横向无缝滚动；空列表返回空。
@@ -46,6 +68,36 @@ function visitRandom(): void {
   if (friends.length === 0) return
   const item = friends[Math.floor(Math.random() * friends.length)]
   window.open(item.url, '_blank', 'noopener,noreferrer')
+}
+
+/**
+ * 复制文本到剪贴板，并短暂展示「已复制」反馈。
+ */
+async function copyText(text: string, key: string): Promise<void> {
+  // 1. 优先用 Clipboard API；失败再走 textarea 回退，兼容旧环境
+  // 2. 成功后写入 copiedKey，约 1.6s 后清空，避免反馈残留
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text)
+    } else {
+      const area = document.createElement('textarea')
+      area.value = text
+      area.setAttribute('readonly', '')
+      area.style.position = 'fixed'
+      area.style.left = '-9999px'
+      document.body.appendChild(area)
+      area.select()
+      document.execCommand('copy')
+      document.body.removeChild(area)
+    }
+    copiedKey.value = key
+    if (copiedTimer) clearTimeout(copiedTimer)
+    copiedTimer = setTimeout(() => {
+      copiedKey.value = ''
+    }, 1600)
+  } catch {
+    copiedKey.value = ''
+  }
 }
 </script>
 
@@ -169,6 +221,50 @@ function visitRandom(): void {
           </div>
           <div class="jb-framework-card__name">{{ item.name }}</div>
         </a>
+      </div>
+    </section>
+
+    <!-- 本站信息：方便对方互换时复制 -->
+    <section class="jb-friends-section jb-friends-section--self">
+      <header class="jb-friends-section__head jb-friends-section__head--line">
+        <h2 class="jb-friends-section__title">本站信息</h2>
+      </header>
+      <p class="jb-friends-section__sub jb-friends-section__sub--self">
+        互换友链时可直接复制以下字段
+      </p>
+
+      <div class="jb-self-card">
+        <div class="jb-self-card__intro">
+          <div class="jb-self-card__avatar" aria-hidden="true">
+            <img :src="selfSite.logo" :alt="selfSite.name" loading="lazy" />
+          </div>
+          <div class="jb-self-card__intro-body">
+            <div class="jb-self-card__name">{{ selfSite.name }}</div>
+            <div class="jb-self-card__desc">{{ selfSite.desc }}</div>
+          </div>
+          <button
+            type="button"
+            class="jb-friends-btn jb-friends-btn--ghost jb-self-card__copy-all"
+            @click="copyText(selfSiteBlock, 'all')"
+          >
+            {{ copiedKey === 'all' ? '已复制' : '一键复制' }}
+          </button>
+        </div>
+
+        <ul class="jb-self-card__fields">
+          <li v-for="field in selfFields" :key="field.key" class="jb-self-card__row">
+            <span class="jb-self-card__label">{{ field.label }}</span>
+            <code class="jb-self-card__value" :title="field.value">{{ field.value }}</code>
+            <button
+              type="button"
+              class="jb-self-card__copy"
+              :aria-label="`复制${field.label}`"
+              @click="copyText(field.value, field.key)"
+            >
+              {{ copiedKey === field.key ? '已复制' : '复制' }}
+            </button>
+          </li>
+        </ul>
       </div>
     </section>
   </div>
@@ -639,5 +735,156 @@ function visitRandom(): void {
 .jb-friends-card__name,
 .jb-friends-card__desc {
   text-decoration: none !important;
+}
+
+/* —— 本站信息卡片 —— */
+.jb-friends-section--self {
+  margin-top: 2.25rem;
+}
+
+.jb-friends-section__sub--self {
+  margin: -0.35rem 0 1rem;
+}
+
+.jb-self-card {
+  box-sizing: border-box;
+  padding: 1.15rem 1.25rem 1.05rem;
+  border-radius: 14px;
+  background: var(--vp-c-bg-elv);
+  box-shadow: 0 1px 8px var(--vp-c-shadow);
+}
+
+.jb-self-card__intro {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1rem;
+  align-items: center;
+  margin-bottom: 0.95rem;
+  padding-bottom: 0.95rem;
+  border-bottom: 1px solid var(--vp-c-border);
+}
+
+.jb-self-card__avatar {
+  display: flex;
+  flex: 0 0 auto;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  width: 3.1rem;
+  height: 3.1rem;
+  border-radius: 50%;
+  background: var(--vp-c-bg-alt);
+  box-shadow: 0 1px 4px var(--vp-c-shadow);
+}
+
+.jb-self-card__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.jb-self-card__intro-body {
+  min-width: 0;
+  flex: 1 1 10rem;
+}
+
+.jb-self-card__name {
+  color: var(--vp-c-text);
+  font-weight: 800;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.jb-self-card__desc {
+  margin-top: 0.2rem;
+  color: var(--vp-c-text-mute);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.jb-self-card__copy-all {
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+.jb-self-card__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jb-self-card__row {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr) auto;
+  gap: 0.55rem 0.75rem;
+  align-items: center;
+  min-height: 2.1rem;
+}
+
+.jb-self-card__label {
+  color: var(--vp-c-text-mute);
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+.jb-self-card__value {
+  overflow: hidden;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 0.35rem 0.55rem;
+  border-radius: 8px;
+  background: var(--vp-c-bg-alt);
+  color: var(--vp-c-text);
+  font-family: var(--code-font-family, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.jb-self-card__copy {
+  flex: 0 0 auto;
+  min-width: 3.4rem;
+  padding: 0.28rem 0.55rem;
+  border: 1px solid var(--vp-c-border);
+  border-radius: 999px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text);
+  font-weight: 600;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    color 0.15s,
+    background-color 0.15s;
+}
+
+.jb-self-card__copy:hover {
+  border-color: var(--vp-c-accent);
+  color: var(--vp-c-accent);
+}
+
+@media (max-width: 640px) {
+  .jb-self-card {
+    padding: 1rem 1rem 0.9rem;
+  }
+
+  .jb-self-card__copy-all {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .jb-self-card__row {
+    grid-template-columns: 2.75rem minmax(0, 1fr) auto;
+    gap: 0.4rem 0.5rem;
+  }
+
+  .jb-self-card__value {
+    font-size: 0.76rem;
+  }
 }
 </style>

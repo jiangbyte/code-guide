@@ -1,4 +1,4 @@
-/** 友链数据：小伙伴 + 框架，展示于 /friends.html */
+/** 友链数据：小伙伴 + 框架 + 本站信息，展示于 /friends.html */
 
 export type FriendLink = {
   name: string
@@ -19,8 +19,24 @@ export type FrameworkLink = {
   preview?: string
 }
 
+/** 本站信息：供对方互换友链时复制 */
+export type SelfSiteInfo = {
+  name: string
+  desc: string
+  url: string
+  /** Logo 绝对地址，方便对方直接粘贴 */
+  logo: string
+}
+
 /** 小伙伴（个人站 / 博主） */
-export const friends: FriendLink[] = []
+export const friends: FriendLink[] = [
+  {
+    name: '年华',
+    desc: '分享生活和技术。',
+    url: 'https://blog.amamo.top',
+    logo: 'https://q1.qlogo.cn/g?b=qq&nk=1323860289&s=640',
+  },
+]
 
 /** 框架与主题 */
 export const frameworks: FrameworkLink[] = [
@@ -36,3 +52,11 @@ export const frameworks: FrameworkLink[] = [
     logo: 'https://theme-hope.vuejs.press/favicon.ico',
   },
 ]
+
+/** 本站可复制字段（与 config 站点元信息保持一致） */
+export const selfSite: SelfSiteInfo = {
+  name: '摸鱼猫泡泡',
+  desc: '记录 Java、工具与工程实践。',
+  url: 'https://jiangbyte.cn',
+  logo: 'https://jiangbyte.cn/img/logo.png',
+}
