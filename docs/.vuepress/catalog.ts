@@ -5,6 +5,7 @@ export const postSeries = [
   { text: '实践', path: 'practice' },
   { text: '嵌入式', path: 'embedded' },
   { text: '运维', path: 'ops' },
+  { text: 'LeetCode', path: 'leetcode' },
 ] as const
 
 /** 源码阅读 · 子系列 */
