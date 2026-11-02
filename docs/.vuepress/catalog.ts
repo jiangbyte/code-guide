@@ -8,7 +8,7 @@ export const postSeries = [
   { text: 'LeetCode', path: 'leetcode' },
 ] as const
 
-/** 源码阅读 · 子系列 */
+/** 源码 · 子系列 */
 export const sourceReadingSeries = [
   { text: 'Java', path: 'java' },
 ] as const
@@ -42,7 +42,7 @@ export const databaseSeries = [
   { text: 'Redis', path: 'redis' },
 ] as const
 
-/** 职场与面试 · 子栏目 */
+/** 职场 · 子栏目 */
 export const careerSeries = [
   { text: '职场工作记录', path: 'workplace' },
   { text: '面试经验', path: 'interview' },
@@ -87,7 +87,7 @@ export const navbar: NavbarOptions = [
     })),
   },
   {
-    text: '源码阅读',
+    text: '源码',
     prefix: '/source-reading/',
     children: sourceReadingSeries.map(({ text, path }) => ({
       text,
@@ -131,7 +131,7 @@ export const navbar: NavbarOptions = [
     })),
   },
   {
-    text: '职场与面试',
+    text: '职场',
     prefix: '/career/',
     children: careerSeries.map(({ text, path }) => ({
       text,
@@ -169,7 +169,7 @@ export const sidebar: SidebarOptions = {
       structureSidebar(text),
     ]),
   ),
-  '/source-reading/': structureSidebar('源码阅读'),
+  '/source-reading/': structureSidebar('源码'),
   ...Object.fromEntries(
     databaseSeries.map(({ text, path }) => [`/database/${path}/`, structureSidebar(text)]),
   ),
@@ -185,7 +185,7 @@ export const sidebar: SidebarOptions = {
   ...Object.fromEntries(
     careerSeries.map(({ text, path }) => [`/career/${path}/`, structureSidebar(text)]),
   ),
-  '/career/': structureSidebar('职场与面试'),
+  '/career/': structureSidebar('职场'),
   ...Object.fromEntries(
     projectSeries.map(({ text, path }) => [`/projects/${path}/`, structureSidebar(text)]),
   ),

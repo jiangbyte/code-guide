@@ -1,9 +1,12 @@
 import { defineClientConfig } from 'vuepress/client'
 import { useActiveState } from '@vuepress/plugin-slimsearch/client'
+// 站点公共组件
 import Bilibili from './components/Bilibili.vue'
 import FloatingRail from './components/FloatingRail.vue'
 import FriendsList from './components/FriendsList.vue'
 import SiteTimeline from './components/SiteTimeline.vue'
+// 文章专用演示（与站点壳层组件分离）
+import BinarySearchDemo from './article-components/leetcode/BinarySearchDemo.vue'
 
 /** 本页目录底边与页脚顶边的间隙 */
 const TOC_FOOTER_GAP = 8
@@ -110,6 +113,7 @@ export default defineClientConfig({
     app.component('Bilibili', Bilibili)
     app.component('FriendsList', FriendsList)
     app.component('SiteTimeline', SiteTimeline)
+    app.component('BinarySearchDemo', BinarySearchDemo)
 
     if (typeof window !== 'undefined') {
       mountSlimsearchAutoClose()
