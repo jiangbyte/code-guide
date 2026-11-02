@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@vuepress/plugin-slimsearch@2.0.0-rc.137':
+    hash: ndprybh3742nhn2w2khdp2b4z4
+    path: patches/@vuepress__plugin-slimsearch@2.0.0-rc.137.patch
+
 importers:
 
   .:
@@ -45,9 +50,9 @@ importers:
       '@vuepress/plugin-revealjs':
         specifier: 2.0.0-rc.137
         version: 2.0.0-rc.137(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(markdown-it@14.3.3)(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))
-      '@vuepress/plugin-search':
+      '@vuepress/plugin-slimsearch':
         specifier: 2.0.0-rc.137
-        version: 2.0.0-rc.137(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))
+        version: 2.0.0-rc.137(patch_hash=ndprybh3742nhn2w2khdp2b4z4)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))
       artplayer:
         specifier: ^5.4.0
         version: 5.4.0
@@ -80,7 +85,7 @@ importers:
         version: 2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44)
       vuepress-theme-hope:
         specifier: 2.0.0-rc.110
-        version: 2.0.0-rc.110(szkk6imvh2hgkvorbvqe674i74)
+        version: 2.0.0-rc.110(gqlxhq3oy7pniwwtwe6e3hyati)
 
 packages:
 
@@ -4602,6 +4607,7 @@ snapshots:
       - '@vuepress/bundler-vite'
       - '@vuepress/bundler-webpack'
       - typescript
+    optional: true
 
   '@vuepress/plugin-seo@2.0.0-rc.137(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))':
     dependencies:
@@ -4637,7 +4643,7 @@ snapshots:
       - '@vuepress/bundler-webpack'
       - typescript
 
-  '@vuepress/plugin-slimsearch@2.0.0-rc.137(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))':
+  '@vuepress/plugin-slimsearch@2.0.0-rc.137(patch_hash=ndprybh3742nhn2w2khdp2b4z4)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))':
     dependencies:
       '@vuepress/helper': 2.0.0-rc.135(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))
       '@vuepress/search-helper': 2.0.0-rc.137(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))
@@ -4650,7 +4656,6 @@ snapshots:
       - '@vuepress/bundler-vite'
       - '@vuepress/bundler-webpack'
       - typescript
-    optional: true
 
   '@vuepress/plugin-theme-data@2.0.0-rc.135(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))':
     dependencies:
@@ -4671,7 +4676,6 @@ snapshots:
       - '@vuepress/bundler-vite'
       - '@vuepress/bundler-webpack'
       - typescript
-    optional: true
 
   '@vuepress/shared@2.0.0-rc.31':
     dependencies:
@@ -6011,8 +6015,7 @@ snapshots:
       arg: 5.0.2
       sax: 1.6.1
 
-  slimsearch@3.0.0:
-    optional: true
+  slimsearch@3.0.0: {}
 
   source-map-js@1.2.2: {}
 
@@ -6290,7 +6293,7 @@ snapshots:
       - '@vuepress/bundler-webpack'
       - typescript
 
-  vuepress-theme-hope@2.0.0-rc.110(szkk6imvh2hgkvorbvqe674i74):
+  vuepress-theme-hope@2.0.0-rc.110(gqlxhq3oy7pniwwtwe6e3hyati):
     dependencies:
       '@vuepress/helper': 2.0.0-rc.135(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))
       '@vuepress/plugin-active-header-links': 2.0.0-rc.135(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))
@@ -6341,7 +6344,7 @@ snapshots:
       '@vuepress/plugin-prismjs': 2.0.0-rc.137(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(@vueuse/core@15.0.0(vue@3.5.44))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))
       '@vuepress/plugin-revealjs': 2.0.0-rc.137(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(markdown-it@14.3.3)(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))
       '@vuepress/plugin-search': 2.0.0-rc.137(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))
-      '@vuepress/plugin-slimsearch': 2.0.0-rc.137(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))
+      '@vuepress/plugin-slimsearch': 2.0.0-rc.137(patch_hash=ndprybh3742nhn2w2khdp2b4z4)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vuepress@2.0.0-rc.31(@vue/compiler-sfc@3.5.44)(@vuepress/bundler-vite@2.0.0-rc.31(@types/node@26.6.5)(@vue/compiler-sfc@3.5.44)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(rolldown@1.2.15)(vite@8.3.5(@types/node@26.6.5)(sass-embedded@1.106.1)(sass@1.106.1)(yaml@2.9.1))(vue@3.5.44))
       sass: 1.106.1
       sass-embedded: 1.106.1
     transitivePeerDependencies:

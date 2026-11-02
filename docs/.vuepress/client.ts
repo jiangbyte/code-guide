@@ -1,4 +1,5 @@
 import { defineClientConfig } from 'vuepress/client'
+import { useActiveState } from '@vuepress/plugin-slimsearch/client'
 import Bilibili from './components/Bilibili.vue'
 import FloatingRail from './components/FloatingRail.vue'
 import FriendsList from './components/FriendsList.vue'
@@ -10,6 +11,9 @@ const TOC_FOOTER_GAP = 8
 const TOC_CLAMP_MIN_WIDTH = 1440
 
 let tocClampBound = false
+/** slimsearch 开关；在 setup 里接到与面板同一份状态 */
+let toggleSearchActive: ((value?: boolean) => void) | null = null
+let slimsearchCloseBound = false
 
 /**
  * 按页脚顶边夹紧 .vp-toc-wrapper，避免目录伸进脚部；不改 #toc overflow，避免双滚动条。
@@ -63,6 +67,44 @@ function mountTocFooterClamp(): void {
   window.addEventListener('resize', clampTocAboveFooter)
 }
 
+/**
+ * 关闭 slimsearch：走官方 activeState，避免 mask.click 打断 Vue 更新。
+ */
+function closeSlimsearchModal(): void {
+  toggleSearchActive?.(false)
+}
+
+/**
+ * 结果点击后延后关面板；Esc 再兜底一次。
+ */
+function mountSlimsearchAutoClose(): void {
+  if (slimsearchCloseBound) return
+  slimsearchCloseBound = true
+
+  document.addEventListener(
+    'click',
+    (event) => {
+      const target = event.target
+      if (!(target instanceof Element)) return
+      // 点结果项（含内部标题/图标）后关闭
+      if (!target.closest('.vp-search-record-matches')) return
+      if (target.closest('.vp-search-remove-icon')) return
+      window.setTimeout(() => closeSlimsearchModal(), 0)
+    },
+    true,
+  )
+
+  document.addEventListener(
+    'keydown',
+    (event) => {
+      if (event.key !== 'Escape') return
+      if (!document.querySelector('.vp-search-modal-wrapper')) return
+      window.setTimeout(() => closeSlimsearchModal(), 0)
+    },
+    true,
+  )
+}
+
 export default defineClientConfig({
   enhance({ app, router }) {
     app.component('Bilibili', Bilibili)
@@ -70,8 +112,9 @@ export default defineClientConfig({
     app.component('SiteTimeline', SiteTimeline)
 
     if (typeof window !== 'undefined') {
+      mountSlimsearchAutoClose()
       router.afterEach(() => {
-        // 目录 DOM 就绪后再按页脚夹紧高度
+        window.setTimeout(() => closeSlimsearchModal(), 0)
         window.setTimeout(() => mountTocFooterClamp(), 0)
         window.setTimeout(() => mountTocFooterClamp(), 400)
       })
@@ -79,6 +122,12 @@ export default defineClientConfig({
   },
   setup() {
     if (typeof window === 'undefined') return
+
+    // 与 SearchModal 共用同一份 activeState
+    const [, toggleActive] = useActiveState()
+    toggleSearchActive = toggleActive
+
+    mountSlimsearchAutoClose()
     window.setTimeout(() => mountTocFooterClamp(), 0)
     window.setTimeout(() => mountTocFooterClamp(), 400)
   },

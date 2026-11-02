@@ -14,7 +14,7 @@
     "@vuepress/bundler-vite": "next",
     "@vuepress/plugin-feed": "2.0.0-rc.137",
     "@vuepress/plugin-revealjs": "2.0.0-rc.137",
-    "@vuepress/plugin-search": "2.0.0-rc.137",
+    "@vuepress/plugin-slimsearch": "2.0.0-rc.137",
     "artplayer": "^5.4.0",
     "dayjs": "^1.11.23",
     "iconify-icon": "^3.0.4",
@@ -35,5 +35,10 @@
     "markmap-toolbar": "^0.18.12",
     "markmap-view": "^0.18.12",
     "qrcode.vue": "^3.11.0"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@vuepress/plugin-slimsearch@2.0.0-rc.137": "patches/@vuepress__plugin-slimsearch@2.0.0-rc.137.patch"
+    }
   }
 }

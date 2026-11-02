@@ -201,13 +201,19 @@ export default defineUserConfig({
         offline: true,
       },
 
-      // 本地标题/大纲搜索：导航栏胶囊输入框 + 下拉标题与 > 小节
-      search: {
-        maxSuggestions: 10,
-        hotKeys: ['s', '/'],
+      // 本地客户端搜索（替代已弃用的 search）
+      slimsearch: {
+        indexContent: false,
+        // 关闭建议：避免 Esc 只关建议、中文输入时面板状态卡住
+        suggestion: false,
+        queryHistoryCount: 0,
+        resultHistoryCount: 0,
+        // 必须是 { key } 对象；字符串热键会导致 SearchBox 渲染时 toUpperCase 报错
+        hotKeys: [{ key: 's' }, { key: '/' }, { key: 'k', ctrl: true }],
         locales: {
           '/': {
             placeholder: '搜索',
+            search: '搜索',
           },
         },
       },

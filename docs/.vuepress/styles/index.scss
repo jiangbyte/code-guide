@@ -287,184 +287,85 @@
   overflow: visible;
 }
 
-/* 本地搜索：始终灰底圆角胶囊（空/有输入/聚焦同款），无描边 */
-:root {
-  --search-input-width: 10.5rem;
-  --search-result-width: 22rem;
-}
+/* slimsearch：顶栏触发钮做成灰底胶囊，贴近旧 search 观感 */
+.vp-search-button {
+  box-sizing: border-box;
+  height: 2rem;
+  margin-inline: 0.5rem 0;
+  padding: 0 0.85rem 0 0.65rem;
+  border: 0;
+  border-radius: 2rem;
+  background: var(--vp-c-bg-alt);
+  color: var(--vp-c-text-mute);
+  font-size: 0.9rem;
+  line-height: 1;
+  box-shadow: none;
 
-.search-box {
-  position: relative;
-  z-index: 200;
-  display: inline-block;
-  margin-inline-start: 0.5rem;
-  vertical-align: middle;
-
-  input {
-    box-sizing: border-box;
-    width: var(--search-input-width);
-    height: 2rem;
-    padding-block: 0;
-    padding-inline: 2rem 0.75rem;
+  &:hover {
     border: 0;
-    border-radius: 2rem;
-    background-color: var(--vp-c-bg-alt);
-    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='13'%3E%3Cg fill='none' stroke='%23999' stroke-width='2'%3E%3Cpath d='m11.29 11.71-4-4'/%3E%3Ccircle cx='5' cy='5' r='4'/%3E%3C/g%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: 0.65rem 0.5rem;
-    background-size: 1rem;
+    background: var(--vp-c-bg-alt);
     color: var(--vp-c-text);
-    font-size: 0.9rem;
-    line-height: 2rem;
-    outline: none;
-    box-shadow: none;
-
-    &,
-    &:focus,
-    &:focus-visible {
-      border: 0;
-      outline: none;
-      box-shadow: none;
-      background-color: var(--vp-c-bg-alt);
-      background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='13'%3E%3Cg fill='none' stroke='%23999' stroke-width='2'%3E%3Cpath d='m11.29 11.71-4-4'/%3E%3Ccircle cx='5' cy='5' r='4'/%3E%3C/g%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: 0.65rem 0.5rem;
-      background-size: 1rem;
-    }
-
-    &::placeholder {
-      color: var(--vp-c-text-mute);
-      opacity: 1;
-    }
   }
 
-  .suggestions {
-    position: absolute;
-    top: calc(100% + 6px);
-    inset-inline-end: 0;
-    z-index: 210;
-    box-sizing: border-box;
-    width: var(--search-result-width);
-    max-width: min(var(--search-result-width), calc(100vw - 1.5rem));
-    max-height: min(70vh, 28rem);
-    margin: 0;
-    padding: 0.4rem;
-    overflow-x: hidden;
-    overflow-y: auto;
-    border: 0;
-    border-radius: 8px;
-    background: var(--vp-c-bg);
-    box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
-    list-style: none;
-    white-space: normal;
+  .search-icon {
+    width: 1rem;
+    height: 1rem;
+    opacity: 0.75;
   }
 
-  .suggestion {
-    margin: 0;
-    padding: 0;
-    border-radius: 6px;
-    line-height: 1.45;
-    cursor: pointer;
-
-    /* 标题与「> 小节」同行；小节整块换行，避免拆开 > 与标题 */
-    a {
-      display: block;
-      padding: 0.5rem 0.75rem;
-      color: var(--vp-c-text);
-      text-decoration: none;
-      overflow-wrap: break-word;
-      white-space: normal;
-    }
-
-    &.focus {
-      background: var(--vp-c-bg-alt);
-
-      a,
-      .page-header {
-        color: var(--vp-c-accent);
-      }
-    }
-  }
-
-  .page-title {
-    font-weight: 600;
-  }
-
-  .page-header {
-    display: inline-block;
-    margin-inline-start: 0.35em;
+  .vp-search-placeholder {
+    margin-inline: 0.35rem 0.15rem;
     color: var(--vp-c-text-mute);
-    font-size: 0.9em;
-    font-weight: 400;
-    white-space: nowrap;
+    font-size: 0.9rem;
+  }
+
+  .vp-search-key-hints {
+    opacity: 0.7;
+  }
+
+  .vp-search-key {
+    min-width: 0;
+    margin-inline: 0.1rem;
+    padding: 0.12rem 0.28rem;
+    border-color: var(--vp-c-border);
+    box-shadow: none;
+    background: var(--vp-c-bg);
+    font-size: 0.7rem;
   }
 }
 
-@media (max-width: 719px) {
-  /* 小屏：收起=放大镜；展开=灰胶囊（样式与桌面一致） */
-  .search-box {
-    flex-shrink: 0;
+@media (max-width: 959px) {
+  .vp-search-button {
+    width: 2rem;
+    min-width: 2rem;
     margin-inline: 0.15rem;
-
-    input {
-      width: 2rem;
-      min-width: 2rem;
-      height: 2rem;
-      padding-inline: 0;
-      color: transparent;
-      caret-color: transparent;
-      border-radius: 2rem;
-      background-color: var(--vp-c-bg-alt);
-      background-position: center;
-      background-size: 1.05rem;
-      cursor: pointer;
-
-      &::placeholder {
-        color: transparent;
-        opacity: 0;
-      }
-
-      &::-webkit-search-cancel-button {
-        appearance: none;
-        display: none;
-      }
-
-      &:focus,
-      &:focus-visible {
-        width: min(10.5rem, 48vw);
-        min-width: 7.5rem;
-        padding-inline: 2rem 0.65rem;
-        color: var(--vp-c-text);
-        caret-color: var(--vp-c-text);
-        border: 0;
-        outline: none;
-        box-shadow: none;
-        border-radius: 2rem;
-        background-color: var(--vp-c-bg-alt);
-        background-position: 0.65rem 0.5rem;
-        background-size: 1rem;
-        cursor: text;
-
-        &::placeholder {
-          color: var(--vp-c-text-mute);
-          opacity: 1;
-        }
-
-        &::-webkit-search-cancel-button {
-          display: unset;
-        }
-      }
-    }
-
-    .suggestions {
-      inset-inline-end: -0.25rem;
-      width: min(20rem, calc(100vw - 1rem));
-    }
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
   }
 
   .vp-navbar-end {
     flex: 0 0 auto;
     gap: 0.15rem;
+  }
+}
+
+/* 弹层搜索输入：圆角方块 → 胶囊 */
+.vp-search-input {
+  border-radius: 999px !important;
+}
+
+.vp-search-box form {
+  border-radius: 999px;
+}
+
+/* 搜索结果选中项用主题色 */
+.vp-search-result.focus,
+.vp-search-suggestion.focus,
+.vp-search-record:hover {
+  .vp-search-record-title,
+  .vp-search-record-content-header {
+    color: var(--vp-c-accent);
   }
 }
 
@@ -508,6 +409,13 @@
 
 .page-cover + .vp-breadcrumb {
   padding-top: 0.15rem;
+}
+
+/* Blog 文章标题：取消 hover 底部强调下划线 */
+.vp-article-wrapper:hover .vp-article-title::after,
+.vp-article-title::after {
+  content: none;
+  display: none;
 }
 
 /* Blog 文章卡片封面：压低高度，裁切居中 */

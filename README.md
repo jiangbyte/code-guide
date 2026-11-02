@@ -25,7 +25,7 @@ pnpm docs:dev      # 本地预览
 pnpm docs:build    # 构建静态站点
 ```
 
-搜索使用 `@vuepress/plugin-search`（本地索引标题与大纲，无需外部服务）。
+搜索使用 `@vuepress/plugin-slimsearch`（本地索引标题与大纲，无需外部服务）。
 
 ## 许可证
 
