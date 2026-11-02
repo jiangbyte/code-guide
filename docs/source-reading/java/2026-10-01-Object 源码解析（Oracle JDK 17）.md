@@ -416,8 +416,6 @@ public final native void wait(long timeoutMillis) throws InterruptedException;
 wait(50) returned, elapsedMs≈50
 ```
 
----
-
 ## `wait(long, int)`：纳秒参数与实现策略
 
 ```java
