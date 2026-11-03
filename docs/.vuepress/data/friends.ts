@@ -36,6 +36,12 @@ export const friends: FriendLink[] = [
     url: 'https://blog.amamo.top',
     logo: 'https://q1.qlogo.cn/g?b=qq&nk=1323860289&s=640',
   },
+  {
+    name: "UpXuu's blog",
+    desc: '逐光而上',
+    url: 'https://upxuu.com',
+    logo: 'https://upxuu.com/images/me.jpg',
+  },
 ]
 
 /** 框架与主题 */
@@ -56,7 +62,7 @@ export const frameworks: FrameworkLink[] = [
 /** 本站可复制字段（与 config 站点元信息保持一致） */
 export const selfSite: SelfSiteInfo = {
   name: '摸鱼猫泡泡',
-  desc: '记录 Java、工具与工程实践。',
+  desc: '记录开发、工具与工程实践。',
   url: 'https://jiangbyte.cn',
   logo: 'https://jiangbyte.cn/img/logo.png',
 }
