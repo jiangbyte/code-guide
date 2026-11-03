@@ -31,12 +31,6 @@ export type SelfSiteInfo = {
 /** 小伙伴（个人站 / 博主） */
 export const friends: FriendLink[] = [
   {
-    name: '年华',
-    desc: '分享生活和技术。',
-    url: 'https://blog.amamo.top',
-    logo: 'https://q1.qlogo.cn/g?b=qq&nk=1323860289&s=640',
-  },
-  {
     name: "UpXuu's blog",
     desc: '逐光而上',
     url: 'https://upxuu.com',
