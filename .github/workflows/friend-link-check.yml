@@ -1,0 +1,123 @@
+# 友链自动巡检：探测 friends 列表 url/logo，异常汇总到可复用 Issue
+name: Friend Link Check
+
+on:
+  schedule:
+    # 每周一 08:00 UTC
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+env:
+  ISSUE_TITLE: '[友链巡检] 存在不可访问链接'
+  ISSUE_LABEL: friend-link-check
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Ensure issue label
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # 1. 若 label 已存在则跳过；否则创建，便于检索与打标
+          if gh label list --json name --jq '.[].name' | grep -Fxq "$ISSUE_LABEL"; then
+            echo "label already exists: $ISSUE_LABEL"
+          else
+            gh label create "$ISSUE_LABEL" \
+              --color 'B60205' \
+              --description '友链巡检发现不可访问链接'
+          fi
+
+      - name: Run friend link check
+        id: check
+        continue-on-error: true
+        run: node scripts/check-friend-links.mjs
+
+      - name: Upsert or close issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          REPORT=friend-link-report.json
+          if [ ! -f "$REPORT" ]; then
+            echo "missing report file"
+            exit 1
+          fi
+
+          FAILED=$(node -e "const r=require('./$REPORT'); process.stdout.write(String(r.failed ?? 0))")
+          CHECKED_AT=$(node -e "const r=require('./$REPORT'); process.stdout.write(r.checkedAt || '')")
+
+          # 查找已打开的同标题 Issue（按 label + title 过滤）
+          ISSUE_NUMBER=$(
+            gh issue list \
+              --label "$ISSUE_LABEL" \
+              --state open \
+              --json number,title \
+              --jq ".[] | select(.title == \"$ISSUE_TITLE\") | .number" \
+              | head -n 1
+          )
+
+          if [ "$FAILED" = "0" ]; then
+            # 全通过：有打开的巡检 Issue 则评论并关闭
+            if [ -n "${ISSUE_NUMBER:-}" ]; then
+              gh issue comment "$ISSUE_NUMBER" --body "本轮巡检（${CHECKED_AT}）全部可达，自动关闭。"
+              gh issue close "$ISSUE_NUMBER" --reason completed
+              echo "closed issue #$ISSUE_NUMBER"
+            else
+              echo "all links healthy; no open issue"
+            fi
+            exit 0
+          fi
+
+          # 有失败：生成 Issue body（Markdown 表）
+          BODY_FILE=$(mktemp)
+          node <<'NODE' > "$BODY_FILE"
+          const fs = require('fs')
+          const report = JSON.parse(fs.readFileSync('friend-link-report.json', 'utf8'))
+          const lines = [
+            '## 友链巡检失败',
+            '',
+            `巡检时间：\`${report.checkedAt}\``,
+            '',
+            `| 名称 | 字段 | URL | 原因 |`,
+            `| --- | --- | --- | --- |`,
+          ]
+          for (const row of report.failures || []) {
+            const reason = row.error || (row.status != null ? `HTTP ${row.status}` : 'unknown')
+            const url = String(row.url || '').replace(/\|/g, '\\|')
+            const name = String(row.name || '').replace(/\|/g, '\\|')
+            lines.push(`| ${name} | ${row.field} | ${url} | ${reason.replace(/\|/g, '\\|')} |`)
+          }
+          lines.push('')
+          lines.push('> 由 `Friend Link Check` workflow 自动维护；链接恢复后会自动关闭。')
+          lines.push('')
+          process.stdout.write(lines.join('\n'))
+          NODE
+
+          if [ -n "${ISSUE_NUMBER:-}" ]; then
+            gh issue edit "$ISSUE_NUMBER" --body-file "$BODY_FILE"
+            gh issue comment "$ISSUE_NUMBER" --body "本轮巡检（${CHECKED_AT}）仍有 ${FAILED} 项不可达，已更新列表。"
+            echo "updated issue #$ISSUE_NUMBER"
+          else
+            gh issue create \
+              --title "$ISSUE_TITLE" \
+              --label "$ISSUE_LABEL" \
+              --body-file "$BODY_FILE"
+            echo "created issue"
+          fi
+
+          # 巡检失败时让 job 标红，便于在 Actions 列表一眼看到
+          exit 1
