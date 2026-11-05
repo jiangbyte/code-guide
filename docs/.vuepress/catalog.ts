@@ -147,7 +147,6 @@ export const navbar: NavbarOptions = [
     })),
   },
   { text: '泡泡', link: '/bubble/' },
-  { text: '友链', link: '/friends.html' },
   {
     text: '关于',
     prefix: '/about',

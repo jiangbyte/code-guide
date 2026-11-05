@@ -673,18 +673,6 @@
   }
 }
 
-/* 友链页：横幅自带标题，隐藏主题默认页标题与面包屑（顶距由 .jb-friends-page margin 承担） */
-.vp-page:has(.jb-friends-page) {
-  .vp-breadcrumb,
-  .vp-page-title {
-    display: none;
-  }
-
-  .theme-hope-content {
-    padding-top: 0;
-  }
-}
-
 .vp-sidebar {
   .vp-sidebar-link {
     width: 100%;

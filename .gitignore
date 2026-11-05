@@ -6,4 +6,3 @@ docs/.vuepress/dist
 .DS_Store
 .env
 *.local
-friend-link-report.json

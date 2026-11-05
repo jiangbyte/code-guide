@@ -3,7 +3,6 @@ import { useActiveState } from '@vuepress/plugin-slimsearch/client'
 // 站点公共组件
 import Bilibili from './components/Bilibili.vue'
 import FloatingRail from './components/FloatingRail.vue'
-import FriendsList from './components/FriendsList.vue'
 import SiteTimeline from './components/SiteTimeline.vue'
 // 文章专用演示（与站点壳层组件分离）
 import BinarySearchDemo from './article-components/leetcode/BinarySearchDemo.vue'
@@ -111,7 +110,6 @@ function mountSlimsearchAutoClose(): void {
 export default defineClientConfig({
   enhance({ app, router }) {
     app.component('Bilibili', Bilibili)
-    app.component('FriendsList', FriendsList)
     app.component('SiteTimeline', SiteTimeline)
     app.component('BinarySearchDemo', BinarySearchDemo)
 
