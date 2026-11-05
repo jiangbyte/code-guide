@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>主题色方案对比 · 摸鱼猫泡泡</title>
+  <style>
+    :root {
+      --page: #fafafa;
+      --card: #ffffff;
+      --text: #1c1917;
+      --mute: #78716c;
+      --line: #e7e5e4;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--page);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 20px 48px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 1.6rem;
+    }
+
+    .lead {
+      margin: 0 0 24px;
+      color: var(--mute);
+      font-size: 0.95rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .opt {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--card);
+      padding: 12px;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      font: inherit;
+      color: inherit;
+    }
+
+    .opt:hover { border-color: #c4c0bc; }
+
+    .opt[aria-pressed="true"] {
+      border-color: #57534e;
+      outline: 2px solid #a8a29e;
+      outline-offset: 1px;
+    }
+
+    .opt-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .opt-title { font-weight: 650; font-size: 0.95rem; }
+
+    .badge {
+      font-size: 0.75rem;
+      color: var(--mute);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 1px 8px;
+    }
+
+    .swatch {
+      height: 52px;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,.08);
+      margin-bottom: 8px;
+    }
+
+    .chips {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .chip {
+      width: 28px;
+      height: 18px;
+      border-radius: 3px;
+      border: 1px solid rgba(0,0,0,.1);
+    }
+
+    .meta {
+      font-size: 0.8rem;
+      color: var(--mute);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .vibe {
+      margin-top: 6px;
+      font-size: 0.9rem;
+      font-weight: 550;
+    }
+
+    .note {
+      margin-top: 2px;
+      font-size: 0.8rem;
+      color: var(--mute);
+    }
+
+    .preview-panel {
+      position: sticky;
+      top: 16px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .panel-title {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .mock {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--page);
+    }
+
+    .mock-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 14px;
+      background: var(--card);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand { font-weight: 700; font-size: 0.9rem; }
+
+    .nav-item {
+      font-size: 0.8rem;
+      color: var(--mute);
+      padding-bottom: 6px;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-item.active {
+      font-weight: 650;
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .nav-search {
+      margin-left: auto;
+      font-size: 0.8rem;
+      color: var(--accent);
+    }
+
+    .mock-body { padding: 14px; display: grid; gap: 12px; }
+
+    .article {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .article h3 {
+      margin: 0 0 6px;
+      font-size: 0.95rem;
+    }
+
+    .article p {
+      margin: 0 0 10px;
+      font-size: 0.8rem;
+      color: var(--mute);
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      color: var(--accent);
+      background: var(--soft);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-right: 8px;
+    }
+
+    .link { font-size: 0.8rem; color: var(--accent); }
+
+    .btns { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .btn {
+      font-size: 0.8rem;
+      font-weight: 650;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 0;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: var(--accent);
+    }
+
+    .btn-ghost {
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 12%, white);
+      border: 1px solid color-mix(in srgb, var(--accent) 28%, white);
+    }
+
+    .btn-hover {
+      color: #fff;
+      background: var(--hover);
+    }
+
+    .values {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .value-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+    }
+
+    .value-row + .value-row {
+      border-top: 1px solid var(--line);
+    }
+
+    .value-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      border: 1px solid rgba(0,0,0,.08);
+      flex: 0 0 auto;
+    }
+
+    .value-label { font-weight: 550; font-size: 0.85rem; }
+    .value-hex {
+      font-size: 0.8rem;
+      color: var(--mute);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .foot {
+      margin-top: 18px;
+      font-size: 0.8rem;
+      color: var(--mute);
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>主题色方案对比</h1>
+    <p class="lead">
+      在系统浏览器里查看，避免 Cursor / Electron 偏色。点击左侧方案，右侧同步预览导航、链接与按钮。
+      已选定：B · 靛蓝 <code>#2563EB</code>（站点已切换）。
+    </p>
+
+    <div class="layout">
+      <div class="options" id="options"></div>
+      <div class="preview-panel">
+        <h2 class="panel-title" id="previewTitle">站内预览</h2>
+        <div class="mock" id="mock">
+          <div class="mock-nav">
+            <span class="brand">摸鱼猫泡泡</span>
+            <span class="nav-item active">首页</span>
+            <span class="nav-item">笔记</span>
+            <span class="nav-item">项目</span>
+            <span class="nav-search">搜索</span>
+          </div>
+          <div class="mock-body">
+            <div class="article">
+              <h3>Debian 安装 GoLand</h3>
+              <p>用官方 Linux tar.gz 安装 GoLand：解压到 apps，并创建桌面入口。</p>
+              <span class="tag">GoLand</span>
+              <span class="link">阅读全文 →</span>
+            </div>
+            <div class="btns">
+              <span class="btn btn-primary">全部文章</span>
+              <span class="btn btn-ghost">关于我</span>
+              <span class="btn btn-hover">hover</span>
+            </div>
+          </div>
+        </div>
+        <div class="values" id="values"></div>
+        <p class="foot">
+          若选 A / B / C，建议站色与泡泡角色橘脱钩；角色色板可继续用 <code>#E8913A</code>。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const OPTIONS = [
+      {
+        id: "current",
+        label: "当前 · 三花橘",
+        vibe: "暖、软、偏宠物感",
+        hex: "#E8913A",
+        hover: "#D17A28",
+        soft: "#F8E8D6",
+        note: "现网主色，和泡泡角色绑定",
+        badge: "现网",
+      },
+      {
+        id: "A",
+        label: "A · 电青",
+        vibe: "干净、工具站、偏活",
+        hex: "#0EA5E9",
+        hover: "#0284C7",
+        soft: "#E0F2FE",
+        note: "和橘对比大，站色与角色会分家",
+        badge: "A",
+      },
+      {
+        id: "B",
+        label: "B · 靛蓝",
+        vibe: "稳、正式、常见技术站",
+        hex: "#2563EB",
+        hover: "#1D4ED8",
+        soft: "#DBEAFE",
+        note: "可借角色 CAT 蓝 #293460 一点血缘",
+        badge: "B",
+      },
+      {
+        id: "C",
+        label: "C · 青绿",
+        vibe: "工程感 + 比纯蓝更活",
+        hex: "#0D9488",
+        hover: "#0F766E",
+        soft: "#CCFBF1",
+        note: "终端 / 运维气质，仍偏冷静",
+        badge: "C",
+      },
+      {
+        id: "D",
+        label: "D · 锐橘",
+        vibe: "仍暖，但更硬更饱和",
+        hex: "#EA580C",
+        hover: "#C2410C",
+        soft: "#FFEDD5",
+        note: "和角色同源，科技感提升有限",
+        badge: "D",
+      },
+    ];
+
+    let active = "B"; // 已落地站点主题
+
+    const optionsEl = document.getElementById("options");
+    const mockEl = document.getElementById("mock");
+    const valuesEl = document.getElementById("values");
+    const previewTitle = document.getElementById("previewTitle");
+
+    function apply(opt) {
+      mockEl.style.setProperty("--accent", opt.hex);
+      mockEl.style.setProperty("--hover", opt.hover);
+      mockEl.style.setProperty("--soft", opt.soft);
+      previewTitle.textContent = "站内预览 · " + opt.label;
+      valuesEl.innerHTML = [
+        ["accent", opt.hex],
+        ["hover", opt.hover],
+        ["soft 底", opt.soft],
+      ]
+        .map(
+          ([label, hex]) => `
+          <div class="value-row">
+            <div class="value-box" style="background:${hex}"></div>
+            <div>
+              <div class="value-label">${label}</div>
+              <div class="value-hex">${hex}</div>
+            </div>
+          </div>`
+        )
+        .join("");
+    }
+
+    function render() {
+      optionsEl.innerHTML = OPTIONS.map((opt) => {
+        const pressed = opt.id === active;
+        return `
+          <button class="opt" type="button" data-id="${opt.id}" aria-pressed="${pressed}">
+            <div class="opt-head">
+              <span class="opt-title">${opt.label}</span>
+              <span class="badge">${pressed ? "预览中" : opt.badge}</span>
+            </div>
+            <div class="swatch" style="background:${opt.hex}"></div>
+            <div class="chips">
+              <span class="chip" style="background:${opt.hex}"></span>
+              <span class="chip" style="background:${opt.hover}"></span>
+              <span class="chip" style="background:${opt.soft}"></span>
+            </div>
+            <div class="meta">主色 ${opt.hex} · hover ${opt.hover}</div>
+            <div class="vibe">${opt.vibe}</div>
+            <div class="note">${opt.note}</div>
+          </button>`;
+      }).join("");
+
+      const opt = OPTIONS.find((o) => o.id === active);
+      apply(opt);
+    }
+
+    optionsEl.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-id]");
+      if (!btn) return;
+      active = btn.dataset.id;
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>

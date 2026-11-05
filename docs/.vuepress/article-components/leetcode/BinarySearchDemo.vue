@@ -371,9 +371,9 @@ reset()
 .bsd {
   margin: 1.25rem 0 1.75rem;
   padding: 1.1rem 1.15rem 1.2rem;
-  border: 1px solid #ead9c8;
+  border: 1px solid var(--vp-c-border);
   border-radius: 12px;
-  background: #fffaf4;
+  background: var(--vp-c-bg-alt);
 }
 
 .bsd__goal {
@@ -399,7 +399,7 @@ reset()
 .bsd__goal-v {
   font-size: 1.65rem;
   font-weight: 750;
-  color: #e8913a;
+  color: var(--vp-c-accent);
   line-height: 1;
 }
 
@@ -472,7 +472,7 @@ reset()
 }
 
 .bsd__chip--target {
-  border-color: #e8913a;
+  border-color: var(--vp-c-accent);
 }
 
 .bsd__chip-k {
@@ -599,14 +599,14 @@ reset()
 }
 
 .bsd__cell.is-mid {
-  background: #fff1e0;
-  border-color: #e8913a;
+  background: var(--vp-c-accent-soft);
+  border-color: var(--vp-c-accent);
   transform: translateY(-3px);
-  box-shadow: 0 6px 14px rgb(232 145 58 / 20%);
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--vp-c-accent) 22%, transparent);
 }
 
 .bsd__cell.is-mid .bsd__markers {
-  color: #c2410c;
+  color: var(--vp-c-accent);
 }
 
 .bsd__cell.is-discard {
@@ -657,8 +657,8 @@ reset()
 }
 
 .bsd__btn--primary {
-  border-color: #e8913a;
-  background: #e8913a;
+  border-color: var(--vp-c-accent);
+  background: var(--vp-c-accent);
   color: #fff;
 }
 
@@ -698,8 +698,8 @@ reset()
 }
 
 .bsd__dot.is-mid {
-  background: #fff1e0;
-  border-color: #e8913a;
+  background: var(--vp-c-accent-soft);
+  border-color: var(--vp-c-accent);
 }
 
 .bsd__dot.is-right {

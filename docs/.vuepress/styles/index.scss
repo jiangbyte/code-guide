@@ -588,80 +588,11 @@
   }
 }
 
-/* 首页：项目卡三列等分 + 卡片内边距/图标对齐 */
+/* 首页无 hero / 项目卡：文章列表紧贴导航下，保留小顶距 */
 .vp-blog-home {
-  .vp-project-panel {
-    display: grid !important;
-    box-sizing: border-box;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-    /* 小屏 theme wrapper padding 为 0，需自带左右边距；大屏与文章区对齐略收一点 */
-    width: auto;
-    margin-inline: 1rem;
-    margin-bottom: 0 !important;
-    padding-inline: 0;
-
-    @media (max-width: hope-config.$pad) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    @media (max-width: hope-config.$mobile) {
-      grid-template-columns: 1fr;
-      margin-inline: 1rem;
-    }
-
-    @media (min-width: hope-config.$pc) {
-      margin-inline: 1.25rem;
-    }
-  }
-
-  .vp-project-card {
-    /* 左文右图标，避免主题 float 造成上下留白不均 */
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-rows: auto auto;
-    column-gap: 0.75rem;
-    row-gap: 0.3rem;
-    align-items: center;
-    box-sizing: border-box;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 14px 16px;
-
-    .vp-project-icon {
-      grid-column: 2;
-      grid-row: 1 / span 2;
-      float: none;
-      align-self: center;
-      height: auto;
-      margin: 0;
-      font-size: 1.35em;
-      line-height: 1;
-    }
-
-    .vp-project-name {
-      grid-column: 1;
-      grid-row: 1;
-      line-height: 1.35;
-    }
-
-    .vp-project-desc {
-      grid-column: 1;
-      grid-row: 2;
-      margin: 0;
-      line-height: 1.4;
-    }
-  }
-
   .vp-blog-main .vp-article-list {
-    margin-top: 1.25rem !important;
+    margin-top: 0.75rem !important;
     padding-top: 0 !important;
-  }
-
-  @media (max-width: hope-config.$pad) {
-    .vp-blog-main .vp-article-list {
-      margin-top: 1rem !important;
-    }
   }
 }
 
