@@ -255,7 +255,7 @@ onUnmounted(() => {
 
           <a class="jb-rail__item jb-rail__item--bubble" href="/bubble/">
             <span class="jb-rail__icon jb-rail__icon--bubble" aria-hidden="true">
-              <img src="/img/logo.png" width="22" height="22" alt="" />
+              <img src="/img/logo.jpg" width="22" height="22" alt="" />
             </span>
             <span class="jb-rail__label">{{ labels.bubble }}</span>
           </a>

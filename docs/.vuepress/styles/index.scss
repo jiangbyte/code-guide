@@ -58,28 +58,42 @@
   }
 }
 
-/* 透明底 logo：略放大，避免细描边发糊 */
+/* 导航 logo / 博客头像 / 侧栏泡泡：圆形 */
 .vp-nav-logo {
   width: 2.1rem;
   height: 2.1rem;
-  object-fit: contain;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.vp-blogger-avatar,
+.vp-blogger-avatar img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.jb-rail__icon--bubble img {
+  display: block;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .vp-hero-image {
   object-fit: contain;
 }
 
-/* 人设默认立绘：控制展示尺寸，避免通栏过大 */
+/* 人设默认立绘：纵向排列，控制展示尺寸 */
 .jb-mascot {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
   margin: 1rem 0 1.25rem;
 
   img {
     display: block;
-    width: min(320px, 72vw);
+    width: min(360px, 78vw);
     height: auto;
-    aspect-ratio: 1;
     object-fit: contain;
   }
 }

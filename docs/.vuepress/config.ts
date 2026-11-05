@@ -45,8 +45,8 @@ export default defineUserConfig({
     author: 'Charlie',
     repo: 'jiangbyte/code-guide',
     docsDir: 'docs',
-    logo: '/img/logo.png',
-    logoDark: '/img/logo.png',
+    logo: '/img/logo.jpg',
+    logoDark: '/img/logo.jpg',
     favicon: '/img/logo.png',
     // 小屏导航只留 logo，不显示站点名
     hideSiteNameOnMobile: true,
@@ -82,7 +82,7 @@ export default defineUserConfig({
     // Blog 模式（plugins.blog 开启后生效）
     blog: {
       name: 'Charlie',
-      avatar: '/img/logo.png',
+      avatar: '/img/logo.jpg',
       description: '记录、实践与思考。',
       intro: '/about/me.html',
       medias: {
@@ -264,7 +264,7 @@ export default defineUserConfig({
       },
 
       seo: {
-        fallBackImage: '/img/logo.png',
+        fallBackImage: '/img/logo.jpg',
         autoDescription: true,
         canonical: 'https://jiangbyte.cn',
         author: 'Charlie',
